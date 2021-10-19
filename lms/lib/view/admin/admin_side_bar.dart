@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:lms/main.dart';
+import 'package:lms/util/my_image.dart';
 
-int isSelected = 0;
+int isSelectedSidebar = 0;
 
 class AdminSideBar extends StatefulWidget {
   @override
@@ -22,8 +23,8 @@ class _AdminSideBarState extends State<AdminSideBar> {
           Container(
             height: height * 0.05,
           ),
-          Image.network(
-            "https://lh3.googleusercontent.com/proxy/y8ZRqBKXGWVY-y54XsDWoYYnk2_SHr_vOCpKkUO4SmWRp5NjIb2mTM6n70cWMPmHNEx8DvThIIurX7IABkNDeqXY--cGBpo-6BslJTLzFX1sXrMw-lfl",
+          Image.asset(
+            "assets/psg.png",
             height: 60,
             width: 60,
           ),
@@ -48,7 +49,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
             margin: EdgeInsets.only(bottom: 5),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: isSelected == 0 ? Colors.white12 : null,
+                color: isSelectedSidebar == 0 ? Colors.white12 : null,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10))),
@@ -56,7 +57,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
               leading: Icon(Icons.document_scanner, color: Colors.white),
               onTap: () {
                 setState(() {
-                  isSelected = 0;
+                  isSelectedSidebar = 0;
                 });
               },
               title: Text(
@@ -69,35 +70,14 @@ class _AdminSideBarState extends State<AdminSideBar> {
             margin: EdgeInsets.only(bottom: 5),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: isSelected == 1 ? Colors.white12 : null,
+                color: isSelectedSidebar == 1 ? Colors.white12 : null,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10))),
             child: ListTile(
               onTap: () {
                 setState(() {
-                  isSelected = 1;
-                });
-              },
-              leading: Icon(Icons.document_scanner, color: Colors.white),
-              title: Text(
-                'Something',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 5),
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: isSelected == 2 ? Colors.white12 : null,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10))),
-            child: ListTile(
-              onTap: () {
-                setState(() {
-                  isSelected = 2;
+                  isSelectedSidebar = 1;
                 });
               },
               leading: Icon(Icons.document_scanner, color: Colors.white),
@@ -111,14 +91,14 @@ class _AdminSideBarState extends State<AdminSideBar> {
             margin: EdgeInsets.only(bottom: 5),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: isSelected == 3 ? Colors.white12 : null,
+                color: isSelectedSidebar == 2 ? Colors.white12 : null,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10))),
             child: ListTile(
               onTap: () {
                 setState(() {
-                  isSelected = 3;
+                  isSelectedSidebar = 2;
                 });
               },
               leading: Icon(Icons.document_scanner, color: Colors.white),
@@ -132,14 +112,35 @@ class _AdminSideBarState extends State<AdminSideBar> {
             margin: EdgeInsets.only(bottom: 5),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: isSelected == 4 ? Colors.white12 : null,
+                color: isSelectedSidebar == 3 ? Colors.white12 : null,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10))),
             child: ListTile(
               onTap: () {
                 setState(() {
-                  isSelected = 4;
+                  isSelectedSidebar = 3;
+                });
+              },
+              leading: Icon(Icons.document_scanner, color: Colors.white),
+              title: Text(
+                'Something',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 5),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: isSelectedSidebar == 4 ? Colors.white12 : null,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10))),
+            child: ListTile(
+              onTap: () {
+                setState(() {
+                  isSelectedSidebar = 4;
                 });
               },
               leading: Icon(Icons.document_scanner, color: Colors.white),
