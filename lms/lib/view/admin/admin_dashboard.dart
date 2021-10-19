@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lms/util/responsive.dart';
+import 'package:lms/view/admin/widgets/dashboard_item.dart';
 
 class AdminDashboard extends StatefulWidget {
   const AdminDashboard({Key? key}) : super(key: key);
@@ -18,24 +19,31 @@ class _AdminDashboardState extends State<AdminDashboard> {
         _crossAxisCount;
     var cellHeight = 200;
     var _aspectRatio = _width / cellHeight;
+
+    var _crossAxisCount3 = 4;
+    var _width3 =
+        (_screenWidth - ((_crossAxisCount3 - 1) * _crossAxisSpacing)) /
+            _crossAxisCount3;
+    var cellHeight3 = 200;
+    var _aspectRatio3 = _width3 / cellHeight3;
+
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
     return Responsive(
         mobile: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: ListView.separated(
+          child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: _aspectRatio,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10),
               itemCount: 10,
-              separatorBuilder: (context, i) {
-                return SizedBox(
-                  height: 10,
-                );
-              },
               itemBuilder: (context, i) {
                 return Container(
                   color: Colors.blue,
-                  height: width * 0.5,
-                  width: width * 0.3,
+                  child: DashboardItem(),
                 );
               }),
         ),
@@ -51,6 +59,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               itemBuilder: (context, i) {
                 return Container(
                   color: Colors.blue,
+                  child: DashboardItem(),
                 );
               }),
         ),
@@ -58,14 +67,15 @@ class _AdminDashboardState extends State<AdminDashboard> {
           padding: const EdgeInsets.all(10.0),
           child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: _aspectRatio,
+                  crossAxisCount: 4,
+                  childAspectRatio: _aspectRatio3,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10),
               itemCount: 10,
               itemBuilder: (context, i) {
                 return Container(
                   color: Colors.blue,
+                  child: DashboardItem(),
                 );
               }),
         ));
