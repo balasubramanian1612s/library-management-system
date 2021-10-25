@@ -14,16 +14,21 @@ class AdminHomeScreen extends StatefulWidget {
 
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  final sidebarDecoration = BoxDecoration(
+      gradient: LinearGradient(
+          colors: [Color(0xff00B4DB), Color(0xff0083B0)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter));
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Color(0xffced9de),
       key: _scaffoldKey,
       drawer: Container(
         width: width * 0.7,
-        color: Colors.blue,
+        decoration: sidebarDecoration,
         alignment: Alignment.topLeft,
         child: AdminSideBar(),
       ),
@@ -38,25 +43,24 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     children: [
                       Container(
                         width: width * 1,
-                        color: Colors.white,
                         child: Stack(
                           children: [
                             menu.isSelectedSidebar == 0
-                                ? AdminDashboard()
+                                ? AdminDashboard(
+                                    widgetResponsive: WidgetResponsive.mobile,
+                                  )
                                 : AdminBooks(),
                             Align(
                               alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: FloatingActionButton(
-                                  backgroundColor: Colors.white,
-                                  onPressed: () {
-                                    _scaffoldKey.currentState!.openDrawer();
-                                  },
-                                  child: Icon(
-                                    Icons.menu,
-                                    color: Colors.blue,
-                                  ),
+                              child: FloatingActionButton(
+                                backgroundColor: Colors.transparent,
+                                elevation: 0,
+                                onPressed: () {
+                                  _scaffoldKey.currentState!.openDrawer();
+                                },
+                                child: Icon(
+                                  Icons.menu,
+                                  color: Color(0xff00B4DB),
                                 ),
                               ),
                             ),
@@ -69,15 +73,16 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     children: [
                       Container(
                         width: width * 0.3,
-                        color: Colors.blue,
+                        decoration: sidebarDecoration,
                         alignment: Alignment.topLeft,
                         child: AdminSideBar(),
                       ),
                       Container(
                         width: width * 0.7,
-                        color: Colors.white,
                         child: menu.isSelectedSidebar == 0
-                            ? AdminDashboard()
+                            ? AdminDashboard(
+                                widgetResponsive: WidgetResponsive.tablet,
+                              )
                             : AdminBooks(),
                       ),
                     ],
@@ -86,15 +91,16 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     children: [
                       Container(
                         width: width * 0.3,
-                        color: Colors.blue,
+                        decoration: sidebarDecoration,
                         alignment: Alignment.topLeft,
                         child: AdminSideBar(),
                       ),
                       Container(
                         width: width * 0.7,
-                        color: Colors.white,
                         child: menu.isSelectedSidebar == 0
-                            ? AdminDashboard()
+                            ? AdminDashboard(
+                                widgetResponsive: WidgetResponsive.desktop,
+                              )
                             : AdminBooks(),
                       ),
                     ],
