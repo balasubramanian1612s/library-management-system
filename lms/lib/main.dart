@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 import 'model/side_bar_menu_model.dart';
 
-
 var titleGroup = AutoSizeGroup();
+AutoSizeGroup ditemgroup = AutoSizeGroup();
+AutoSizeGroup ditemsubtitlegroup = AutoSizeGroup();
 
 void main() {
   runApp(MyApp());
