@@ -46,14 +46,19 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                 : AdminBooks(),
                             Align(
                               alignment: Alignment.topLeft,
-                              child: IconButton(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: FloatingActionButton(
+                                  backgroundColor: Colors.white,
                                   onPressed: () {
                                     _scaffoldKey.currentState!.openDrawer();
                                   },
-                                  icon: Icon(
+                                  child: Icon(
                                     Icons.menu,
-                                    color: Colors.white,
-                                  )),
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),

@@ -42,29 +42,35 @@ class _AdminBooksState extends State<AdminBooks> {
       children: [
         Table(
           border: TableBorder.all(
-              color: Colors.black, style: BorderStyle.solid, width: 2),
+              color: Colors.black, style: BorderStyle.none, width: 2),
           children: [
             TableRow(children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(children: [Text('ID', style: TextStyle(fontSize: 20.0))]),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(children: [Text('Name', style: TextStyle(fontSize: 20.0))]),
+                child: Column(
+                    children: [Text('ID', style: TextStyle(fontSize: 20.0))]),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
-                    children: [Text('Quantity', style: TextStyle(fontSize: 20.0))]),
+                    children: [Text('Name', style: TextStyle(fontSize: 20.0))]),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(children: [Text('Author', style: TextStyle(fontSize: 20.0))]),
+                child: Column(children: [
+                  Text('Quantity', style: TextStyle(fontSize: 20.0))
+                ]),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(children: [Text('Edit', style: TextStyle(fontSize: 20.0))]),
+                child: Column(children: [
+                  Text('Author', style: TextStyle(fontSize: 20.0))
+                ]),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                    children: [Text('Edit', style: TextStyle(fontSize: 20.0))]),
               ),
             ]),
             ...books.map<TableRow>((Book b) {
