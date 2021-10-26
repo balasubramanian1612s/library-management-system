@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+enum WidgetResponsive { mobile, desktop, tablet }
+
 class Responsive extends StatelessWidget {
   final Widget mobile;
   final Widget tablet;
