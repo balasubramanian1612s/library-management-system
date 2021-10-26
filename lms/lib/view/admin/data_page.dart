@@ -41,12 +41,14 @@ class _DataPageState extends State<DataPage> {
         child: Container(
           height: height * 0.15,
           width: width,
+          color: Colors.black54,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
                     onPressed: () {
@@ -56,11 +58,30 @@ class _DataPageState extends State<DataPage> {
                     },
                     child: Text('Edit'),
                   ),
+                  Container(
+                    height: height * 0.055,
+                    width: width * 0.2,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(height * 0.025)),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: width * 0.005,
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            suffixIcon: Icon(Icons.search)),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Container(
                 height: height * 0.85,
                 width: width,
+                color: Colors.white,
                 child: SingleChildScrollView(
                   child: DataTable(
                     columns: const <DataColumn>[
@@ -193,3 +214,11 @@ class _DataPageState extends State<DataPage> {
 //               ],
 //             ),
 //           ],
+
+
+// IconButton(
+//                             alignment: Alignment.centerRight,
+//                             icon: Icon(Icons.search),
+//                             color: Colors.blue,
+//                             onPressed: () {},
+//                           ),
