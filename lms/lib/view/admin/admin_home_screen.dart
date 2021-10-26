@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lms/model/side_bar_menu_model.dart';
 import 'package:lms/util/responsive.dart';
 import 'package:lms/view/admin/admin_books.dart';
+import 'package:lms/view/admin/admin_borrow.dart';
 import 'package:lms/view/admin/admin_dashboard.dart';
+import 'package:lms/view/admin/admin_return.dart';
 import 'package:provider/provider.dart';
 
 import 'admin_side_bar.dart';
@@ -32,83 +34,96 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         alignment: Alignment.topLeft,
         child: AdminSideBar(),
       ),
-      body: SingleChildScrollView(
-        child: Consumer<SideBarMenuModel>(
-          builder: (context, menu, child) {
-            return Container(
-              height: height,
-              width: width,
-              child: Responsive(
-                  mobile: Row(
-                    children: [
-                      Container(
-                        width: width * 1,
-                        child: Stack(
-                          children: [
-                            menu.isSelectedSidebar == 0
-                                ? AdminDashboard(
-                                    widgetResponsive: WidgetResponsive.mobile,
-                                  )
-                                : AdminBooks(),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: FloatingActionButton(
-                                backgroundColor: Colors.transparent,
-                                elevation: 0,
-                                onPressed: () {
-                                  _scaffoldKey.currentState!.openDrawer();
-                                },
-                                child: Icon(
-                                  Icons.menu,
-                                  color: Color(0xff00B4DB),
+      body: Builder(builder: (context) {
+        return SingleChildScrollView(
+          child: Consumer<SideBarMenuModel>(
+            builder: (context, menu, child) {
+              return Container(
+                height: height,
+                width: width,
+                child: Responsive(
+                    mobile: Row(
+                      children: [
+                        Container(
+                          width: width * 1,
+                          child: Stack(
+                            children: [
+                              getSelectedWidget(menu.isSelectedSidebar,
+                                  WidgetResponsive.mobile),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: FloatingActionButton(
+                                  backgroundColor: Colors.transparent,
+                                  elevation: 0,
+                                  onPressed: () {
+                                    _scaffoldKey.currentState!.openDrawer();
+                                  },
+                                  child: Icon(
+                                    Icons.menu,
+                                    color: Color(0xff00B4DB),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  tablet: Row(
-                    children: [
-                      Container(
-                        width: width * 0.3,
-                        decoration: sidebarDecoration,
-                        alignment: Alignment.topLeft,
-                        child: AdminSideBar(),
-                      ),
-                      Container(
-                        width: width * 0.7,
-                        child: menu.isSelectedSidebar == 0
-                            ? AdminDashboard(
-                                widgetResponsive: WidgetResponsive.tablet,
-                              )
-                            : AdminBooks(),
-                      ),
-                    ],
-                  ),
-                  desktop: Row(
-                    children: [
-                      Container(
-                        width: width * 0.3,
-                        decoration: sidebarDecoration,
-                        alignment: Alignment.topLeft,
-                        child: AdminSideBar(),
-                      ),
-                      Container(
-                        width: width * 0.7,
-                        child: menu.isSelectedSidebar == 0
-                            ? AdminDashboard(
-                                widgetResponsive: WidgetResponsive.desktop,
-                              )
-                            : AdminBooks(),
-                      ),
-                    ],
-                  )),
-            );
-          },
-        ),
-      ),
+                      ],
+                    ),
+                    tablet: Row(
+                      children: [
+                        Container(
+                          width: width * 0.3,
+                          decoration: sidebarDecoration,
+                          alignment: Alignment.topLeft,
+                          child: AdminSideBar(),
+                        ),
+                        Container(
+                          width: width * 0.7,
+                          child: getSelectedWidget(
+                              menu.isSelectedSidebar, WidgetResponsive.tablet),
+                        ),
+                      ],
+                    ),
+                    desktop: Row(
+                      children: [
+                        Container(
+                          width: width * 0.3,
+                          decoration: sidebarDecoration,
+                          alignment: Alignment.topLeft,
+                          child: AdminSideBar(),
+                        ),
+                        Container(
+                          width: width * 0.7,
+                          child: getSelectedWidget(
+                              menu.isSelectedSidebar, WidgetResponsive.desktop),
+                        ),
+                      ],
+                    )),
+              );
+            },
+          ),
+        );
+      }),
     );
+  }
+
+  Widget getSelectedWidget(int val, WidgetResponsive responsive) {
+    switch (val) {
+      case 0:
+        return AdminDashboard(
+          widgetResponsive: responsive,
+        );
+      case 1:
+        return AdminBooks();
+      case 3:
+        return AdminBorrow();
+      case 4:
+        return AdminReturn();
+      default:
+        AdminDashboard(
+          widgetResponsive: WidgetResponsive.desktop,
+        );
+    }
+    return Container();
   }
 }

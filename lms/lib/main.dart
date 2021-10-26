@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lms/view/admin/admin_books.dart';
 import 'package:lms/view/admin/admin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +12,9 @@ var titleGroup = AutoSizeGroup();
 AutoSizeGroup ditemgroup = AutoSizeGroup();
 AutoSizeGroup ditemsubtitlegroup = AutoSizeGroup();
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
