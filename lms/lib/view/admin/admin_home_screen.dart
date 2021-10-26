@@ -3,6 +3,7 @@ import 'package:lms/model/side_bar_menu_model.dart';
 import 'package:lms/util/responsive.dart';
 import 'package:lms/view/admin/admin_books.dart';
 import 'package:lms/view/admin/admin_dashboard.dart';
+import 'package:lms/view/admin/data_page.dart';
 import 'package:provider/provider.dart';
 
 import 'admin_side_bar.dart';
@@ -43,7 +44,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                           children: [
                             menu.isSelectedSidebar == 0
                                 ? AdminDashboard()
-                                : AdminBooks(),
+                                : DataPage(),
                             Align(
                               alignment: Alignment.topLeft,
                               child: Padding(
@@ -78,7 +79,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                         color: Colors.white,
                         child: menu.isSelectedSidebar == 0
                             ? AdminDashboard()
-                            : AdminBooks(),
+                            : DataPage(),
                       ),
                     ],
                   ),
@@ -95,7 +96,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                         color: Colors.white,
                         child: menu.isSelectedSidebar == 0
                             ? AdminDashboard()
-                            : AdminBooks(),
+                            : DataPage(),
                       ),
                     ],
                   )),
