@@ -5,6 +5,7 @@ import 'package:lms/view/admin/admin_books.dart';
 import 'package:lms/view/admin/admin_borrow.dart';
 import 'package:lms/view/admin/admin_dashboard.dart';
 import 'package:lms/view/admin/admin_return.dart';
+import 'package:lms/view/admin/data_page.dart';
 import 'package:provider/provider.dart';
 
 import 'admin_side_bar.dart';
@@ -114,7 +115,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           widgetResponsive: responsive,
         );
       case 1:
-        return AdminBooks();
+        return DataPage();
       case 3:
         return AdminBorrow();
       case 4:
