@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lms/model/book.dart';
 import 'package:lms/model/borrowed_book.dart';
+import 'package:lms/model/side_bar_menu_model.dart';
+import 'package:provider/provider.dart';
 
 class AdminReturn extends StatefulWidget {
   const AdminReturn({Key? key}) : super(key: key);
@@ -419,6 +421,9 @@ class _AdminReturnState extends State<AdminReturn> {
                                           'Ledger has been updated successfully. You can check in Return Ledger.'),
                                       backgroundColor: Colors.green,
                                     ));
+                                    Provider.of<SideBarMenuModel>(context,
+                                            listen: false)
+                                        .change(0);
                                   },
                                   child: Text('Returned, Submit!'),
                                 ),

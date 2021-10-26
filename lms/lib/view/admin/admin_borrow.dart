@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lms/model/side_bar_menu_model.dart';
+import 'package:provider/provider.dart';
 
 class AdminBorrow extends StatefulWidget {
   const AdminBorrow({Key? key}) : super(key: key);
@@ -156,6 +158,8 @@ class _AdminBorrowState extends State<AdminBorrow> {
                           'Ledger has been updated successfully. You can check in Borrow Ledger.'),
                       backgroundColor: Colors.green,
                     ));
+                    Provider.of<SideBarMenuModel>(context, listen: false)
+                        .change(0);
                   },
                   child: Text('Add Entry'),
                 ),
