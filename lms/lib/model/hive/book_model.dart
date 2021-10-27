@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'book_model.g.dart';
 
 @HiveType(typeId: 0)
-class BookModel extends HiveObject {
+class Book extends HiveObject {
   @HiveField(0)
   String? bookName;
 
@@ -19,7 +19,7 @@ class BookModel extends HiveObject {
   @HiveField(4)
   int? edition;
 
-  BookModel(
+  Book(
       {required this.edition,
       required this.bookName,
       required this.serialNumber,

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:lms/model/book.dart';
+import 'package:lms/model/hive/book_model.dart';
 import 'package:lms/view/admin/admin_home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,9 +14,8 @@ class DataFetchScreen extends StatefulWidget {
 
 class _DataFetchScreenState extends State<DataFetchScreen> {
   bool isFetching = true;
-  int loadingProgress = 0;
   String progressText = "Loading";
-  Box? dataBox;
+  Box<Book>? dataBox;
 
   Future fetchData() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -30,20 +29,27 @@ class _DataFetchScreenState extends State<DataFetchScreen> {
     // QuerySnapshot<Map<String, dynamic>> querySnapshot =
     //     await ref.get() as QuerySnapshot<Map<String, dynamic>>;
     // var doc = querySnapshot.docs[0].data();
-    // dataBox.put(
+    // print(doc);
+    // dataBox!
+    //     .put(
     //   doc['SNO'],
     //   Book(
-    //       id: doc['SNO'].toString(),
-    //       name: doc['TITLE'],
-    //       totalQty: 1,
+    //       edition: doc['EDITION'],
+    //       bookName: doc['TITLE'],
+    //       serialNumber: doc['SNO'],
+    //       publisherName: doc['PUBLISHERNAME'],
     //       author: doc['AUTHOR']),
-    // );
+    // )
+    //     .then((value) {
+    //   print("sucessfully added to db");
+    // });
+    List<Book> recievedBooks = dataBox!.values.toList();
+    print(recievedBooks[0].serialNumber);
   }
 
   @override
   void initState() {
-    print(Hive.isBoxOpen('books'));
-    dataBox = Hive.box('books');
+    dataBox = Hive.box<Book>('books');
     fetchData().then((value) {
       setState(() {
         progressText = "Loaded data";
