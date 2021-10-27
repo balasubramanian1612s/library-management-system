@@ -45,6 +45,9 @@ class _DataFetchScreenState extends State<DataFetchScreen> {
       print(recievedBooks.length);
 
       await pref.setBool('onboarding', false);
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => AdminHomeScreen()));
     }
   }
 
