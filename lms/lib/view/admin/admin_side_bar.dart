@@ -6,6 +6,8 @@ import 'package:lms/util/my_image.dart';
 import 'package:provider/provider.dart';
 
 class AdminSideBar extends StatefulWidget {
+  bool isMobile;
+  AdminSideBar({this.isMobile = false});
   @override
   _AdminSideBarState createState() => _AdminSideBarState();
 }
@@ -58,6 +60,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
                 child: ListTile(
                   leading: Icon(Icons.document_scanner, color: Colors.white),
                   onTap: () {
+                    Navigator.pop(context);
                     setState(() {
                       menu.change(0);
                     });
@@ -78,6 +81,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
                         bottomLeft: Radius.circular(10))),
                 child: ListTile(
                   onTap: () {
+                    Navigator.pop(context);
                     setState(() {
                       menu.change(1);
                     });
@@ -99,6 +103,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
                         bottomLeft: Radius.circular(10))),
                 child: ListTile(
                   onTap: () {
+                    Navigator.pop(context);
                     setState(() {
                       menu.change(2);
                     });
@@ -120,6 +125,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
                         bottomLeft: Radius.circular(10))),
                 child: ListTile(
                   onTap: () {
+                    Navigator.pop(context);
                     setState(() {
                       menu.change(3);
                     });
@@ -141,6 +147,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
                         bottomLeft: Radius.circular(10))),
                 child: ListTile(
                   onTap: () {
+                    Navigator.pop(context);
                     setState(() {
                       menu.change(4);
                     });
