@@ -15,7 +15,7 @@ class DataFetchScreen extends StatefulWidget {
 class _DataFetchScreenState extends State<DataFetchScreen> {
   bool isFetching = true;
   String progressText = "Loading";
-  Box<Book>? dataBox;
+  Box<BookModel>? dataBox;
 
   Future fetchData() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -23,33 +23,34 @@ class _DataFetchScreenState extends State<DataFetchScreen> {
     if (pref.containsKey('onboarding')) {
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => AdminHomeScreen()));
-    }
+    } else {
+      print("data getting fetched");
+      CollectionReference ref = FirebaseFirestore.instance.collection('books');
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await ref.get() as QuerySnapshot<Map<String, dynamic>>;
+      querySnapshot.docs.forEach((document) {
+        Map<String, dynamic> doc = document.data();
+        dataBox!.put(
+          doc['SNO'],
+          BookModel(
+              edition: doc['EDITION'],
+              bookName: doc['TITLE'],
+              serialNumber: doc['SNO'],
+              publisherName: doc['PUBLISHERNAME'],
+              author: doc['AUTHOR']),
+        );
+      });
 
-    // CollectionReference ref = FirebaseFirestore.instance.collection('books');
-    // QuerySnapshot<Map<String, dynamic>> querySnapshot =
-    //     await ref.get() as QuerySnapshot<Map<String, dynamic>>;
-    // var doc = querySnapshot.docs[0].data();
-    // print(doc);
-    // dataBox!
-    //     .put(
-    //   doc['SNO'],
-    //   Book(
-    //       edition: doc['EDITION'],
-    //       bookName: doc['TITLE'],
-    //       serialNumber: doc['SNO'],
-    //       publisherName: doc['PUBLISHERNAME'],
-    //       author: doc['AUTHOR']),
-    // )
-    //     .then((value) {
-    //   print("sucessfully added to db");
-    // });
-    List<Book> recievedBooks = dataBox!.values.toList();
-    print(recievedBooks[0].serialNumber);
+      List<BookModel> recievedBooks = dataBox!.values.toList();
+      print(recievedBooks.length);
+
+      await pref.setBool('onboarding', false);
+    }
   }
 
   @override
   void initState() {
-    dataBox = Hive.box<Book>('books');
+    dataBox = Hive.box<BookModel>('books');
     fetchData().then((value) {
       setState(() {
         progressText = "Loaded data";

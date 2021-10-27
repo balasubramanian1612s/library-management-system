@@ -6,17 +6,17 @@ part of 'book_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class BookAdapter extends TypeAdapter<Book> {
+class BookModelAdapter extends TypeAdapter<BookModel> {
   @override
   final int typeId = 0;
 
   @override
-  Book read(BinaryReader reader) {
+  BookModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Book(
+    return BookModel(
       edition: fields[4] as int?,
       bookName: fields[0] as String?,
       serialNumber: fields[2] as int?,
@@ -26,7 +26,7 @@ class BookAdapter extends TypeAdapter<Book> {
   }
 
   @override
-  void write(BinaryWriter writer, Book obj) {
+  void write(BinaryWriter writer, BookModel obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
@@ -47,7 +47,7 @@ class BookAdapter extends TypeAdapter<Book> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is BookAdapter &&
+      other is BookModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

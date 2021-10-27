@@ -22,8 +22,8 @@ void main() async {
   await Firebase.initializeApp();
   await Hive.initFlutter();
 
-  Hive.registerAdapter<Book>(BookAdapter());
-  await Hive.openBox<Book>("books");
+  Hive.registerAdapter<BookModel>(BookModelAdapter());
+  await Hive.openBox<BookModel>("books");
 
   runApp(MyApp());
 }
