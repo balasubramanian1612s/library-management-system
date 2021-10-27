@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:lms/model/side_bar_menu_model.dart';
 import 'package:lms/util/responsive.dart';
 import 'package:lms/view/admin/admin_books.dart';
@@ -9,6 +10,7 @@ import 'package:lms/view/admin/data_page.dart';
 import 'package:provider/provider.dart';
 
 import 'admin_side_bar.dart';
+import 'books.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   @override
@@ -16,12 +18,21 @@ class AdminHomeScreen extends StatefulWidget {
 }
 
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
+  Box<Book>? dataBox;
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final sidebarDecoration = BoxDecoration(
       gradient: LinearGradient(
           colors: [Color(0xff00B4DB), Color(0xff0083B0)],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter));
+  @override
+  void initState() {
+    dataBox = Hive.box<Book>('books');
+    print('opened at admin');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
