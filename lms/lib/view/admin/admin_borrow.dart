@@ -126,7 +126,7 @@ class _AdminBorrowState extends State<AdminBorrow> {
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Text(
-                                "Adding to Ledger, Please Wait...",
+                                "Fetching Book Data, Please wait...",
                                 style: TextStyle(fontSize: 19),
                               ),
                             ),
@@ -139,27 +139,81 @@ class _AdminBorrowState extends State<AdminBorrow> {
                             .where('SNO',
                                 isEqualTo: int.parse(bookidController.text))
                             .get();
-                    Map<String, dynamic> ds = qs.docs[0].data();
-                    await FirebaseFirestore.instance.collection("Borrow").add({
-                      "ROLL_NO": rollnoController.text,
-                      "BOOK_ID": int.parse(bookidController.text),
-                      "ISSUE_DATE": DateTime.now(),
-                      "DUE_DATE": DateTime.now().add(Duration(days: 20)),
-                      "TITLE": ds['TITLE'],
-                      "AUTHOR": ds['AUTHOR'],
-                      "EDITION": ds['EDITION']
-                    }).then((value) {
+                    if (qs.docs.length == 0) {
                       Navigator.pop(context);
-                      bookidController.clear();
-                      rollnoController.clear();
-                    });
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text(
-                          'Ledger has been updated successfully. You can check in Borrow Ledger.'),
-                      backgroundColor: Colors.green,
-                    ));
-                    Provider.of<SideBarMenuModel>(context, listen: false)
-                        .change(0);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Book Not Available"),
+                              actions: <Widget>[
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Close'))
+                              ],
+                            );
+                          });
+                    } else {
+                      Map<String, dynamic> ds = qs.docs[0].data();
+                      Navigator.pop(context);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Check and Confirm Book"),
+                              content: Container(
+                                height: 500,
+                                width: double.maxFinite,
+                                child: SingleChildScrollView(
+                                  child: Table(
+                                    border:
+                                        TableBorder.all(color: Colors.black),
+                                    children: [
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text('Title'),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text('Content'),
+                                        ),
+                                      ]),
+                                      ...ds.entries
+                                          .map<TableRow>(
+                                            (e) => TableRow(children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(e.key.toString()),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(e.value.toString()),
+                                              ),
+                                            ]),
+                                          )
+                                          .toList()
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                    onPressed: () async {
+                                      uploadToDatabase(ds);
+                                    },
+                                    child: Text(
+                                      'Confirm',
+                                      style: TextStyle(fontSize: 20),
+                                    ))
+                              ],
+                            );
+                          });
+                    }
                   },
                   child: Text('Add Entry'),
                 ),
@@ -169,5 +223,42 @@ class _AdminBorrowState extends State<AdminBorrow> {
         ],
       );
     });
+  }
+
+  uploadToDatabase(Map<String, dynamic> ds) async {
+    Navigator.pop(context);
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                "Adding to Ledger, Please Wait...",
+                style: TextStyle(fontSize: 19),
+              ),
+            ),
+          );
+        });
+    await FirebaseFirestore.instance.collection("Borrow").add({
+      "ROLL_NO": rollnoController.text,
+      "BOOK_ID": int.parse(bookidController.text),
+      "ISSUE_DATE": DateTime.now(),
+      "DUE_DATE": DateTime.now().add(Duration(days: 20)),
+      "TITLE": ds['TITLE'],
+      "AUTHOR": ds['AUTHOR'],
+      "EDITION": ds['EDITION']
+    }).then((value) {
+      Navigator.pop(context);
+      bookidController.clear();
+      rollnoController.clear();
+    });
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(
+          'Ledger has been updated successfully. You can check in Borrow Ledger.'),
+      backgroundColor: Colors.green,
+    ));
+    Provider.of<SideBarMenuModel>(context, listen: false).change(0);
   }
 }
