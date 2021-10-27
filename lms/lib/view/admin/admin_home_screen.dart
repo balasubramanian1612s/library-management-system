@@ -26,18 +26,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter));
 
-  void printNames() {
-    List<BookModel> books = dataBox!.values.toList();
-    for (int i = 0; i < 10; i++) {
-      print(books[i].bookName);
-    }
-  }
-
   @override
   void initState() {
     dataBox = Hive.box<BookModel>('books');
     print('opened at admin');
-    printNames();
     super.initState();
   }
 

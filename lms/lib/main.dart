@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lms/model/hive/book_model.dart';
+import 'package:lms/model/hive/return_model.dart';
+import 'package:lms/model/hive/borrow_model.dart';
 import 'package:lms/util/data_fetch.dart';
 import 'package:lms/view/admin/admin_books.dart';
 import 'package:lms/view/admin/admin_home_screen.dart';
@@ -23,7 +25,12 @@ void main() async {
   await Hive.initFlutter();
 
   Hive.registerAdapter<BookModel>(BookModelAdapter());
+  Hive.registerAdapter<ReturnBookModel>(ReturnBookModelAdapter());
+  Hive.registerAdapter<BorrowedBookModel>(BorrowedBookModelAdapter());
+
   await Hive.openBox<BookModel>("books");
+  await Hive.openBox<BorrowedBookModel>("borrow");
+  await Hive.openBox<ReturnBookModel>("return");
 
   runApp(MyApp());
 }
