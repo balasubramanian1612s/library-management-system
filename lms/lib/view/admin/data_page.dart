@@ -1,6 +1,3 @@
-import 'dart:html';
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:lms/model/hive/book_model.dart';
@@ -15,27 +12,25 @@ class DataPage extends StatefulWidget {
 
 class _DataPageState extends State<DataPage> {
   bool edit = false;
+  Box<BookModel>? dataBox;
+  TextEditingController controller = TextEditingController();
+  String _searchResult = '';
+  List<BookModel>? booksList;
+  List<BookModel>? filteredBooks;
+  String updatedText = '';
+
+  @override
+  void initState() {
+    dataBox = Hive.box<BookModel>("books");
+    booksList = dataBox!.values.toList();
+    filteredBooks = booksList!;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
-    TextEditingController controller = TextEditingController();
-    String _searchResult = '';
-    Box<BookModel> dataBox = Hive.box<BookModel>("books");
-
-    final List<BookModel> booksList = dataBox.values.toList();
-
-    List<BookModel> filteredBooks = booksList;
-
-    Future updateTableItems() async {
-      filteredBooks = booksList
-          .where((element) =>
-              element.bookName!.toLowerCase().contains(_searchResult) ||
-              element.author!.toLowerCase().contains(_searchResult))
-          .toList();
-    }
 
     return Scaffold(
       backgroundColor: Colors.black54,
@@ -76,9 +71,15 @@ class _DataPageState extends State<DataPage> {
                             setState(() {
                               _searchResult = value.toLowerCase();
                             });
-                            updateTableItems().then((value) {
-                              setState(() {});
-                            });
+                            filteredBooks = booksList!
+                                .where((element) =>
+                                    element.bookName!
+                                        .toLowerCase()
+                                        .contains(_searchResult) ||
+                                    element.author!
+                                        .toLowerCase()
+                                        .contains(_searchResult))
+                                .toList();
                           },
                         ),
                         trailing: IconButton(
@@ -87,7 +88,7 @@ class _DataPageState extends State<DataPage> {
                             setState(() {
                               controller.clear();
                               _searchResult = '';
-                              filteredBooks = booksList;
+                              filteredBooks = booksList!;
                             });
                           },
                         ),
@@ -106,7 +107,6 @@ class _DataPageState extends State<DataPage> {
                       DataColumn(
                         label: Text(
                           'ID',
-                          overflow: TextOverflow.fade,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -115,8 +115,6 @@ class _DataPageState extends State<DataPage> {
                       DataColumn(
                         label: Text(
                           'Title',
-                          overflow: TextOverflow.visible,
-                          softWrap: true,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -125,8 +123,6 @@ class _DataPageState extends State<DataPage> {
                       DataColumn(
                         label: Text(
                           'Author',
-                          overflow: TextOverflow.visible,
-                          softWrap: true,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -135,8 +131,6 @@ class _DataPageState extends State<DataPage> {
                       DataColumn(
                         label: Text(
                           'Edition',
-                          overflow: TextOverflow.visible,
-                          softWrap: true,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -145,15 +139,13 @@ class _DataPageState extends State<DataPage> {
                       DataColumn(
                         label: Text(
                           'Publisher',
-                          overflow: TextOverflow.visible,
-                          softWrap: true,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
-                    rows: filteredBooks.map((book) {
+                    rows: filteredBooks!.map((book) {
                       return DataRow(cells: [
                         DataCell(Text(
                           book.serialNumber.toString(),
@@ -163,31 +155,23 @@ class _DataPageState extends State<DataPage> {
                         DataCell(
                             Text(
                               book.bookName.toString(),
-                              overflow: TextOverflow.visible,
-                              softWrap: true,
                             ),
-                            showEditIcon: edit, onTap: () {
-                          setState(() {
-                            showTextDialog(context,
-                                title: 'Title',
-                                value: book.bookName.toString());
-                          });
+                            showEditIcon: edit, onTap: () async {
+                          updatedText = await showTextDialog(context,
+                              title: 'Title', value: book.bookName.toString());
+                          int foundIndex = booksList!.indexOf(book);
+                          booksList![foundIndex].bookName = updatedText;
+                          setState(() {});
                         }),
                         DataCell(Text(
                           book.author.toString(),
-                          overflow: TextOverflow.visible,
-                          softWrap: true,
                         )),
                         DataCell(Text(
                           book.edition.toString(),
-                          overflow: TextOverflow.visible,
-                          softWrap: true,
                         )),
                         DataCell(
                             Text(
                               book.publisherName.toString(),
-                              overflow: TextOverflow.visible,
-                              softWrap: true,
                             ),
                             showEditIcon: edit),
                       ]);
