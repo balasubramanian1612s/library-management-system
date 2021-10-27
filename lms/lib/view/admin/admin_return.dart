@@ -200,6 +200,23 @@ class _AdminReturnState extends State<AdminReturn> {
                                         setState(() {
                                           books[index].isSelected = v!;
                                         });
+                                        totalFineAmount = 0;
+                                        books.forEach((emp) {
+                                          if (emp.isSelected) {
+                                            int days = emp.dueDate
+                                                .difference(DateTime.now())
+                                                .inDays;
+                                            int multiplier = 5;
+                                            days = days > 0 ? 0 : days;
+                                            if (days < 0) {
+                                              days = days.abs();
+                                              setState(() {
+                                                totalFineAmount +=
+                                                    days * multiplier;
+                                              });
+                                            }
+                                          }
+                                        });
                                       });
                                 }),
                           )
@@ -240,6 +257,7 @@ class _AdminReturnState extends State<AdminReturn> {
                                       )),
                                   onPressed: () async {
                                     if (noOfBooksSelected > 0) {
+                                      totalFineAmount = 0;
                                       books.forEach((emp) {
                                         if (emp.isSelected) {
                                           int days = emp.dueDate
