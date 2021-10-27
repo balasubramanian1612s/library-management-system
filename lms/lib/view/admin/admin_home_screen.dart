@@ -92,13 +92,13 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     tablet: Row(
                       children: [
                         Container(
-                          width: width * 0.3,
+                          width: width * 0.2,
                           decoration: sidebarDecoration,
                           alignment: Alignment.topLeft,
                           child: AdminSideBar(),
                         ),
                         Container(
-                          width: width * 0.7,
+                          width: width * 0.8,
                           child: getSelectedWidget(
                               menu.isSelectedSidebar, WidgetResponsive.tablet),
                         ),
@@ -107,13 +107,13 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     desktop: Row(
                       children: [
                         Container(
-                          width: width * 0.3,
+                          width: width * 0.2,
                           decoration: sidebarDecoration,
                           alignment: Alignment.topLeft,
                           child: AdminSideBar(),
                         ),
                         Container(
-                          width: width * 0.7,
+                          width: width * 0.8,
                           child: getSelectedWidget(
                               menu.isSelectedSidebar, WidgetResponsive.desktop),
                         ),

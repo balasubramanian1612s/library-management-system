@@ -2,9 +2,9 @@ import 'dart:html';
 import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:lms/model/hive/book_model.dart';
 import 'package:lms/view/admin/widgets/text_dialog_widget.dart';
-
-import 'books.dart';
 
 class DataPage extends StatefulWidget {
   const DataPage({Key? key}) : super(key: key);
@@ -21,17 +21,22 @@ class _DataPageState extends State<DataPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
-    TextEditingController textEditingController = TextEditingController();
+    TextEditingController controller = TextEditingController();
+    String _searchResult = '';
+    Box<BookModel> dataBox = Hive.box<BookModel>("books");
 
-    final List<Map> books = List.generate(30, (i) {
-      return {
-        "id": "$i",
-        "title": "Book $i",
-        "author": "Author of Book $i",
-        "totalBooks": "100",
-        "availability": "30",
-      };
-    });
+    final List<BookModel> booksList = dataBox.values.toList();
+
+    List<BookModel> filteredBooks = booksList;
+
+    Future updateTableItems() async {
+      filteredBooks = booksList
+          .where((element) =>
+              element.bookName!.toLowerCase().contains(_searchResult) ||
+              element.author!.toLowerCase().contains(_searchResult))
+          .toList();
+    }
+
     return Scaffold(
       backgroundColor: Colors.black54,
       body: Container(
@@ -59,20 +64,33 @@ class _DataPageState extends State<DataPage> {
                     child: Text('Edit'),
                   ),
                   Container(
-                    height: height * 0.055,
+                    height: height * 0.06,
                     width: width * 0.2,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(height * 0.025)),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: width * 0.005,
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            suffixIcon: Icon(Icons.search)),
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.search),
+                        title: TextField(
+                          decoration: InputDecoration(
+                              hintText: 'Search', border: InputBorder.none),
+                          onChanged: (value) {
+                            setState(() {
+                              _searchResult = value.toLowerCase();
+                            });
+                            updateTableItems().then((value) {
+                              setState(() {});
+                            });
+                          },
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.cancel),
+                          onPressed: () {
+                            setState(() {
+                              controller.clear();
+                              _searchResult = '';
+                              filteredBooks = booksList;
+                            });
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -88,6 +106,7 @@ class _DataPageState extends State<DataPage> {
                       DataColumn(
                         label: Text(
                           'ID',
+                          overflow: TextOverflow.fade,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -96,6 +115,8 @@ class _DataPageState extends State<DataPage> {
                       DataColumn(
                         label: Text(
                           'Title',
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -104,6 +125,8 @@ class _DataPageState extends State<DataPage> {
                       DataColumn(
                         label: Text(
                           'Author',
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -111,7 +134,9 @@ class _DataPageState extends State<DataPage> {
                       ),
                       DataColumn(
                         label: Text(
-                          'Total Books',
+                          'Edition',
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -119,26 +144,51 @@ class _DataPageState extends State<DataPage> {
                       ),
                       DataColumn(
                         label: Text(
-                          'Available',
+                          'Publisher',
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
-                    rows: books.map((book) {
+                    rows: filteredBooks.map((book) {
                       return DataRow(cells: [
-                        DataCell(Text(book['id'].toString())),
-                        DataCell(Text(book['title'].toString()),
+                        DataCell(Text(
+                          book.serialNumber.toString(),
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
+                        )),
+                        DataCell(
+                            Text(
+                              book.bookName.toString(),
+                              overflow: TextOverflow.visible,
+                              softWrap: true,
+                            ),
                             showEditIcon: edit, onTap: () {
                           setState(() {
                             showTextDialog(context,
-                                title: 'Title', value: book['title']);
+                                title: 'Title',
+                                value: book.bookName.toString());
                           });
                         }),
-                        DataCell(Text(book['author'].toString())),
-                        DataCell(Text(book['totalBooks'].toString())),
-                        DataCell(Text(book['availability'].toString()),
+                        DataCell(Text(
+                          book.author.toString(),
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
+                        )),
+                        DataCell(Text(
+                          book.edition.toString(),
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
+                        )),
+                        DataCell(
+                            Text(
+                              book.publisherName.toString(),
+                              overflow: TextOverflow.visible,
+                              softWrap: true,
+                            ),
                             showEditIcon: edit),
                       ]);
                     }).toList(),
