@@ -46,7 +46,7 @@ class _DataPageState extends State<DataPage> {
         height: height,
         width: width,
         child: Container(
-          height: height * 0.15,
+          height: height * 0.2,
           width: width,
           color: Colors.white38,
           child: Column(
@@ -59,7 +59,7 @@ class _DataPageState extends State<DataPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    width: width * 0.14,
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                     decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(10.0),
@@ -71,59 +71,55 @@ class _DataPageState extends State<DataPage> {
                           'Sort by',
                           style: TextStyle(color: Colors.white),
                         ),
-                        Container(
-                          width: width * 0.06,
-                          child: Theme(
-                            data: Theme.of(context).copyWith(
-                              canvasColor: Colors.blue.shade400,
-                            ),
-                            child: DropdownButton(
-                                value: selectedOption,
-                                icon: Padding(
-                                  padding: EdgeInsets.only(left: width * 0.007),
-                                  child: Icon(
-                                    Icons.arrow_circle_down_sharp,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                underline: Container(
-                                  height: 0,
-                                ),
-                                onChanged: (String? newValue) {
-                                  if (newValue == "Title") {
-                                    filteredBooks!.sort((a, b) =>
-                                        a.bookName!.compareTo(b.bookName!));
-                                  } else if (newValue == "Author") {
-                                    filteredBooks!.sort((a, b) =>
-                                        a.author!.compareTo(b.author!));
-                                  } else {
-                                    filteredBooks!.sort((a, b) => a
-                                        .serialNumber!
-                                        .compareTo(b.serialNumber!));
-                                  }
-                                  setState(() {
-                                    selectedOption = newValue!;
-                                  });
-                                },
-                                iconEnabledColor: Colors.blue[900],
-                                items: ["Title", "Author", "ID"]
-                                    .map(
-                                      (option) => DropdownMenuItem(
-                                        child: Text(
-                                          option,
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        value: option,
-                                      ),
-                                    )
-                                    .toList()),
+                        SizedBox(
+                          width: width * 0.005,
+                        ),
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            canvasColor: Colors.blue.shade400,
                           ),
+                          child: DropdownButton(
+                              value: selectedOption,
+                              icon: Icon(
+                                Icons.arrow_circle_down_sharp,
+                                color: Colors.white,
+                              ),
+                              underline: Container(
+                                height: 0,
+                              ),
+                              onChanged: (String? newValue) {
+                                if (newValue == "Title") {
+                                  filteredBooks!.sort((a, b) =>
+                                      a.bookName!.compareTo(b.bookName!));
+                                } else if (newValue == "Author") {
+                                  filteredBooks!.sort(
+                                      (a, b) => a.author!.compareTo(b.author!));
+                                } else {
+                                  filteredBooks!.sort((a, b) => a.serialNumber!
+                                      .compareTo(b.serialNumber!));
+                                }
+                                setState(() {
+                                  selectedOption = newValue!;
+                                });
+                              },
+                              iconEnabledColor: Colors.blue[900],
+                              items: ["Title", "Author", "ID"]
+                                  .map(
+                                    (option) => DropdownMenuItem(
+                                      child: Text(
+                                        option,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      value: option,
+                                    ),
+                                  )
+                                  .toList()),
                         )
                       ],
                     ),
                   ),
                   Container(
-                      height: 85,
+                      height: height * 0.08,
                       width: width * 0.5,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -186,7 +182,7 @@ class _DataPageState extends State<DataPage> {
                 ],
               ),
               Container(
-                height: height * 0.85,
+                height: height * 0.8,
                 width: width,
                 color: Colors.white,
                 child: SingleChildScrollView(
