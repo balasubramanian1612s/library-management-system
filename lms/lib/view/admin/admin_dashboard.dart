@@ -8,6 +8,7 @@ import 'package:lms/model/hive/borrow_model.dart';
 import 'package:lms/model/side_bar_menu_model.dart';
 import 'package:lms/util/responsive.dart';
 import 'package:lms/view/admin/widgets/dashboard_item.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class AdminDashboard extends StatefulWidget {
@@ -440,12 +441,47 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Container(
-                                color: Colors.red,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "COMPUTER SCIENCE DEPARTMENT",
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  0, 175, 214, 1),
+                                              fontSize: width * 0.025,
+                                              overflow: TextOverflow.clip,
+                                              fontWeight: FontWeight.w900),
+                                        ),
+                                        SizedBox(height: height * 0.025),
+                                        Text(
+                                          "Library Management System",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: width * 0.0165,
+                                              overflow: TextOverflow.clip,
+                                              fontStyle: FontStyle.italic,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ],
+                                    ),
+                                    LottieBuilder.asset('library.json'),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Container(
                       height: 100,
