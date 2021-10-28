@@ -17,6 +17,7 @@ class _AdminReturnHistoryState extends State<AdminReturnHistory> {
   List<ReturnBookModel> filteredBooks = [];
   String updatedText = '';
   bool isLoading = true;
+  String selectedOption = "ID";
 
   @override
   void initState() {
@@ -72,7 +73,6 @@ class _AdminReturnHistoryState extends State<AdminReturnHistory> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.black54,
@@ -80,149 +80,294 @@ class _AdminReturnHistoryState extends State<AdminReturnHistory> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Container(
-              color: Colors.white,
-              height: height,
-              width: width,
-              child: Container(
-                height: height * 0.15,
+          : LayoutBuilder(builder: (context, constraints) {
+              double width = constraints.maxWidth;
+
+              return Container(
+                color: Colors.white,
+                height: height,
                 width: width,
-                color: Colors.black54,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      height: height * 0.1,
-                      width: width,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0, right: 10),
-                          child: Expanded(
-                              child: TextField(
-                            onChanged: (value) {
-                              setState(() {
-                                _searchResult = value.toLowerCase();
-                              });
-                              filteredBooks = booksList
-                                  .where((element) =>
-                                      element.bookName!
-                                          .toLowerCase()
-                                          .contains(_searchResult) ||
-                                      element.author!
-                                          .toLowerCase()
-                                          .contains(_searchResult))
-                                  .toList();
-                            },
-                            style: const TextStyle(color: Colors.black),
-                            decoration: const InputDecoration(
-                                fillColor: Colors.white,
-                                filled: true,
-                                hintText: 'Search',
-                                suffixIcon: Icon(
-                                  Icons.search,
-                                  color: Colors.black,
-                                )),
-                          )),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: height * 0.9,
-                      width: width,
-                      color: Colors.white,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: DataTable(
-                            columns: const <DataColumn>[
-                              DataColumn(
-                                label: Text(
-                                  'ID',
-                                  style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.bold),
+                child: Container(
+                  height: height * 0.15,
+                  width: width,
+                  color: Colors.black54,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: height * 0.1,
+                        width: width,
+                        child: Center(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: width * 0.65,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, right: 10),
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _searchResult = value.toLowerCase();
+                                      });
+                                      filteredBooks = booksList
+                                          .where((element) =>
+                                              element.bookName!
+                                                  .toLowerCase()
+                                                  .contains(_searchResult) ||
+                                              element.author!
+                                                  .toLowerCase()
+                                                  .contains(_searchResult))
+                                          .toList();
+                                    },
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: const InputDecoration(
+                                        fillColor: Colors.white,
+                                        filled: true,
+                                        hintText: 'Search',
+                                        suffixIcon: Icon(
+                                          Icons.search,
+                                          color: Colors.black,
+                                        )),
+                                  ),
                                 ),
                               ),
-                              DataColumn(
-                                label: Text(
-                                  'Title',
-                                  style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.bold),
+                              Expanded(child: Container()),
+                              Container(
+                                margin: EdgeInsets.only(right: 20),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: width * 0.02),
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    const Text(
+                                      'Sort by',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.005,
+                                    ),
+                                    Theme(
+                                      data: Theme.of(context).copyWith(
+                                        canvasColor: Colors.blue.shade400,
+                                      ),
+                                      child: DropdownButton(
+                                          value: selectedOption,
+                                          icon: const Icon(
+                                            Icons.arrow_circle_down_sharp,
+                                            color: Colors.white,
+                                          ),
+                                          underline: Container(
+                                            height: 0,
+                                          ),
+                                          onChanged: (String? newValue) {
+                                            if (newValue == "Title") {
+                                              filteredBooks.sort((a, b) => a
+                                                  .bookName!
+                                                  .compareTo(b.bookName!));
+                                            } else if (newValue == "Author") {
+                                              filteredBooks.sort((a, b) => a
+                                                  .author!
+                                                  .compareTo(b.author!));
+                                            } else {
+                                              filteredBooks.sort((a, b) => a
+                                                  .serialNumber!
+                                                  .compareTo(b.serialNumber!));
+                                            }
+                                            setState(() {
+                                              selectedOption = newValue!;
+                                            });
+                                          },
+                                          iconEnabledColor: Colors.blue[900],
+                                          items: ["Title", "Author", "ID"]
+                                              .map(
+                                                (option) => DropdownMenuItem(
+                                                  child: Text(
+                                                    option,
+                                                    style: const TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                  value: option,
+                                                ),
+                                              )
+                                              .toList()),
+                                    )
+                                  ],
                                 ),
                               ),
-                              DataColumn(
-                                label: Text(
-                                  'Author',
-                                  style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
-                                  'Borrow Date',
-                                  style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
-                                  'Return Date',
-                                  style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
-                                  'Fine Paid',
-                                  style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                              // Container(
+                              //   width: width * 0.3,
+                              //   decoration: BoxDecoration(
+                              //     color: Colors.blue,
+                              //     borderRadius: BorderRadius.circular(10.0),
+                              //   ),
+                              //   child: Row(
+                              //     mainAxisAlignment:
+                              //         MainAxisAlignment.spaceEvenly,
+                              //     children: [
+                              //       Text(
+                              //         'Sort by',
+                              //         style: TextStyle(color: Colors.white),
+                              //       ),
+                              //       Container(
+                              //         child: Theme(
+                              //           data: Theme.of(context).copyWith(
+                              //             canvasColor: Colors.blue.shade400,
+                              //           ),
+                              //           child: DropdownButton(
+                              //               value: selectedOption,
+                              //               icon: Padding(
+                              //                 padding: EdgeInsets.only(
+                              //                     left: width * 0.007),
+                              //                 child: Icon(
+                              //                   Icons.arrow_circle_down_sharp,
+                              //                   color: Colors.white,
+                              //                 ),
+                              //               ),
+                              //               underline: Container(
+                              //                 height: 0,
+                              //               ),
+                              //               onChanged: (String? newValue) {
+                              // if (newValue == "Title") {
+                              //   filteredBooks.sort((a, b) =>
+                              //       a.name.compareTo(b.name));
+                              // } else if (newValue == "Author") {
+                              //   filteredBooks.sort((a, b) => a
+                              //       .author
+                              //       .compareTo(b.author));
+                              // } else {
+                              //   filteredBooks.sort((a, b) =>
+                              //       a.id.compareTo(b.id));
+                              // }
+                              // setState(() {
+                              //   selectedOption = newValue!;
+                              // });
+                              //               },
+                              //               iconEnabledColor: Colors.blue[900],
+                              //               items: ["Title", "Author", "ID"]
+                              //                   .map(
+                              //                     (option) => DropdownMenuItem(
+                              //                       child: Text(
+                              //                         option,
+                              //                         style: TextStyle(
+                              //                             color: Colors.white),
+                              //                       ),
+                              //                       value: option,
+                              //                     ),
+                              //                   )
+                              //                   .toList()),
+                              //         ),
+                              //       )
+                              //     ],
+                              //   ),
+                              // ),
                             ],
-                            rows: filteredBooks.map((book) {
-                              return DataRow(cells: [
-                                DataCell(Text(
-                                  book.serialNumber.toString(),
-                                  overflow: TextOverflow.visible,
-                                  softWrap: true,
-                                )),
-                                DataCell(
-                                  Text(
-                                    book.bookName.toString(),
-                                  ),
-                                ),
-                                DataCell(Text(
-                                  book.author.toString(),
-                                )),
-                                DataCell(Text(
-                                  '${book.issueDate!.day}/${book.issueDate!.month}/${book.issueDate!.year}',
-                                )),
-                                DataCell(
-                                  Text(
-                                    '${book.dueDate!.day}/${book.dueDate!.month}/${book.dueDate!.year}',
-                                  ),
-                                ),
-                                DataCell(Text(
-                                  'Rs. ${book.dueFee.toString()}',
-                                )),
-                              ]);
-                            }).toList(),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        height: height * 0.9,
+                        width: width,
+                        color: Colors.white,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: DataTable(
+                              columns: const <DataColumn>[
+                                DataColumn(
+                                  label: Text(
+                                    'ID',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Title',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Author',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Borrow Date',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Return Date',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Fine Paid',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                              rows: filteredBooks.map((book) {
+                                return DataRow(cells: [
+                                  DataCell(Text(
+                                    book.serialNumber.toString(),
+                                    overflow: TextOverflow.visible,
+                                    softWrap: true,
+                                  )),
+                                  DataCell(
+                                    Text(
+                                      book.bookName.toString(),
+                                    ),
+                                  ),
+                                  DataCell(Text(
+                                    book.author.toString(),
+                                  )),
+                                  DataCell(Text(
+                                    '${book.issueDate!.day}/${book.issueDate!.month}/${book.issueDate!.year}',
+                                  )),
+                                  DataCell(
+                                    Text(
+                                      '${book.dueDate!.day}/${book.dueDate!.month}/${book.dueDate!.year}',
+                                    ),
+                                  ),
+                                  DataCell(Text(
+                                    'Rs. ${book.dueFee.toString()}',
+                                  )),
+                                ]);
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ),
+              );
+            }),
     );
   }
 }

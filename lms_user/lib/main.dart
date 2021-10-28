@@ -8,6 +8,7 @@ import 'package:lms_student_user/model/hive/book_model.dart';
 import 'package:lms_student_user/model/hive/return_model.dart';
 import 'package:lms_student_user/model/hive/borrow_model.dart';
 import 'package:lms_student_user/view/admin/admin_home_screen.dart';
+import 'package:lms_student_user/view/onboard/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'model/side_bar_menu_model.dart';
 
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme,
           ),
         ),
-        home: AdminHomeScreen(),
+        home: LoginPage(),
       ),
     );
   }
