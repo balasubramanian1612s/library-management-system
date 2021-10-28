@@ -1,6 +1,3 @@
-import 'dart:html';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hive/hive.dart';
@@ -242,7 +239,7 @@ class _DataPageState extends State<DataPage> {
                               Text(
                                 book.bookName.toString(),
                               ),
-                              showEditIcon: edit, onTap: () async {
+                              showEditIcon: edit, onDoubleTap: () async {
                             updatedText = await showTextDialog(context,
                                 title: 'Title',
                                 value: book.bookName.toString());
@@ -250,17 +247,50 @@ class _DataPageState extends State<DataPage> {
                             booksList![foundIndex].bookName = updatedText;
                             setState(() {});
                           }),
-                          DataCell(Text(
-                            book.author.toString(),
-                          )),
-                          DataCell(Text(
-                            book.edition.toString(),
-                          )),
                           DataCell(
-                              Text(
-                                book.publisherName.toString(),
-                              ),
-                              showEditIcon: edit),
+                            Text(
+                              book.author.toString(),
+                            ),
+                            showEditIcon: edit,
+                            onDoubleTap: () async {
+                              updatedText = await showTextDialog(context,
+                                  title: 'Author',
+                                  value: book.author.toString());
+                              int foundIndex = booksList!.indexOf(book);
+                              booksList![foundIndex].author = updatedText;
+                              setState(() {});
+                            },
+                          ),
+                          DataCell(
+                            Text(
+                              book.edition.toString(),
+                            ),
+                            showEditIcon: edit,
+                            onDoubleTap: () async {
+                              updatedText = await showTextDialog(context,
+                                  title: 'Edition',
+                                  value: book.edition.toString());
+                              int foundIndex = booksList!.indexOf(book);
+                              booksList![foundIndex].edition =
+                                  int.parse(updatedText);
+                              setState(() {});
+                            },
+                          ),
+                          DataCell(
+                            Text(
+                              book.publisherName.toString(),
+                            ),
+                            showEditIcon: edit,
+                            onDoubleTap: () async {
+                              updatedText = await showTextDialog(context,
+                                  title: 'Pulisher',
+                                  value: book.publisherName.toString());
+                              int foundIndex = booksList!.indexOf(book);
+                              booksList![foundIndex].publisherName =
+                                  updatedText;
+                              setState(() {});
+                            },
+                          ),
                         ]);
                       }).toList(),
                     ),
