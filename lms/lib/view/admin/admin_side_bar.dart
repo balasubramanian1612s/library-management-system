@@ -27,23 +27,27 @@ class _AdminSideBarState extends State<AdminSideBar> {
               Container(
                 height: height * 0.05,
               ),
-              Image.asset(
-                "assets/psg.png",
-                height: 60,
-                width: 60,
+              Center(
+                child: Image.asset(
+                  "assets/psg.png",
+                  height: 60,
+                  width: 60,
+                ),
               ),
               Container(
                 height: height * 0.01,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: AutoSizeText(
-                  'PSG Tech',
-                  presetFontSizes: [25, 22, 20],
-                  group: titleGroup,
-                  maxLines: 4,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: AutoSizeText(
+                    'PSG Tech',
+                    presetFontSizes: [25, 22, 20],
+                    group: titleGroup,
+                    maxLines: 4,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               Container(

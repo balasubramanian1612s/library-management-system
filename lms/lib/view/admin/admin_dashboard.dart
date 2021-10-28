@@ -411,226 +411,247 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ),
                   ],
                 )
-              : Column(
-                  children: [
-                    Container(
-                      color: Colors.white,
-                      height: 50,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 30,
-                            width: constraints.maxWidth * 0.5,
-                            alignment: Alignment.centerLeft,
-                            child: AutoSizeText(
-                              '   Dashboard',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 100,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    height < 650
-                        ? Container(
-                            height: 0,
-                          )
-                        : Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Container(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "COMPUTER SCIENCE DEPARTMENT",
-                                          style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  0, 175, 214, 1),
-                                              fontSize: width * 0.025,
-                                              overflow: TextOverflow.clip,
-                                              fontWeight: FontWeight.w900),
+              : Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      // Container(
+                      //   color: Colors.white,
+                      //   height: 50,
+                      //   child: Row(
+                      //     children: [
+                      //       Container(
+                      //         height: 30,
+                      //         width: constraints.maxWidth * 0.5,
+                      //         alignment: Alignment.centerLeft,
+                      //         child: AutoSizeText(
+                      //           '   Dashboard',
+                      //           style: TextStyle(
+                      //             color: Colors.black,
+                      //             fontSize: 100,
+                      //           ),
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
+                      height < 650
+                          ? Container(
+                              height: 0,
+                            )
+                          : Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      SizedBox(
+                                        width: constraints.maxWidth * 0.4 - 20,
+                                        child: Image.asset(
+                                          'assets/libimage.png',
                                         ),
-                                        SizedBox(height: height * 0.025),
-                                        Text(
-                                          "Library Management System",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: width * 0.0165,
-                                              overflow: TextOverflow.clip,
-                                              fontStyle: FontStyle.italic,
-                                              fontWeight: FontWeight.w700),
+                                      ),
+                                      SizedBox(
+                                        width: constraints.maxWidth * 0.6 - 20,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "COMPUTER SCIENCE DEPARTMENT",
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      0, 175, 214, 1),
+                                                  fontSize: width * 0.025,
+                                                  overflow: TextOverflow.clip,
+                                                  fontWeight: FontWeight.w900),
+                                            ),
+                                            SizedBox(height: height * 0.025),
+                                            Text(
+                                              "Library Management System",
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: width * 0.0165,
+                                                  overflow: TextOverflow.clip,
+                                                  fontStyle: FontStyle.italic,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                    LottieBuilder.asset('library.json'),
-                                  ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 100,
-                      padding: EdgeInsets.only(
-                        left: 10,
-                        right: 10,
+                      SizedBox(
+                        height: 10,
                       ),
-                      child: Row(
-                        children: [
-                          Expanded(child: Container()),
-                          InkWell(
-                            onTap: () {
-                              Provider.of<SideBarMenuModel>(context,
-                                      listen: false)
-                                  .change(3);
-                            },
-                            child: Container(
-                              height: 100,
-                              width: constraints.maxWidth / 2 - 30,
-                              child: Column(
-                                children: [
-                                  Container(
-                                      height: 40,
-                                      child: AutoSizeText(
-                                        'Borrow',
-                                        style: TextStyle(
-                                            fontSize: 100, color: Colors.white),
-                                      )),
-                                  Container(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                      alignment: Alignment.center,
-                                      height: 30,
-                                      child: AutoSizeText(
-                                        'Click here for borrow entry',
-                                        textAlign: TextAlign.center,
-                                        group: ditemsubtitlegroup,
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 100,
-                                        ),
-                                      )),
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color(0xff00B4DB),
-                                        Color(0xff0083B0)
-                                      ])),
-                            ),
-                          ),
-                          Expanded(child: Container()),
-                          InkWell(
-                            onTap: () {
-                              Provider.of<SideBarMenuModel>(context,
-                                      listen: false)
-                                  .change(4);
-                            },
-                            child: Container(
-                              height: 100,
-                              width: constraints.maxWidth / 2 - 30,
-                              child: Column(
-                                children: [
-                                  Container(
-                                      height: 40,
-                                      child: AutoSizeText(
-                                        'Return',
-                                        style: TextStyle(
-                                            fontSize: 100, color: Colors.white),
-                                      )),
-                                  Container(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                      alignment: Alignment.center,
-                                      height: 30,
-                                      child: AutoSizeText(
-                                        'Click here for return entry',
-                                        group: ditemsubtitlegroup,
-                                        textAlign: TextAlign.center,
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 100,
-                                        ),
-                                      )),
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color(0xff00B4DB),
-                                        Color(0xff0083B0)
-                                      ])),
-                            ),
-                          ),
-                          Expanded(child: Container()),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: 280,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: GridView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    childAspectRatio: _aspectRatio3,
-                                    mainAxisSpacing: 10,
-                                    crossAxisSpacing: 10),
-                            itemCount: items.length,
-                            itemBuilder: (context, i) {
-                              return Container(
+                      Container(
+                        height: 100,
+                        padding: EdgeInsets.only(
+                          left: 10,
+                          right: 10,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(child: Container()),
+                            InkWell(
+                              onTap: () {
+                                Provider.of<SideBarMenuModel>(context,
+                                        listen: false)
+                                    .change(3);
+                              },
+                              child: Container(
+                                height: 100,
+                                width: constraints.maxWidth / 2 - 30,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                        height: 40,
+                                        child: AutoSizeText(
+                                          'Borrow',
+                                          style: TextStyle(
+                                              fontSize: 100,
+                                              color: Colors.white),
+                                        )),
+                                    Container(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                        alignment: Alignment.center,
+                                        height: 30,
+                                        child: AutoSizeText(
+                                          'Click here for borrow entry',
+                                          textAlign: TextAlign.center,
+                                          group: ditemsubtitlegroup,
+                                          maxLines: 2,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 100,
+                                          ),
+                                        )),
+                                  ],
+                                ),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20.0),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
                                     gradient: LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
-                                        colors: items[i].color == Colors.white
-                                            ? [Colors.white, Colors.white]
-                                            : [
-                                                Color(0xff00B4DB),
-                                                Color(0xff0083B0)
-                                              ])),
-                                child: DashboardItem(
-                                  widgetResponsive: WidgetResponsive.desktop,
-                                  item: items[i],
+                                        colors: [
+                                          Color(0xff00B4DB),
+                                          Color(0xff0083B0)
+                                        ])),
+                              ),
+                            ),
+                            Expanded(child: Container()),
+                            InkWell(
+                              onTap: () {
+                                Provider.of<SideBarMenuModel>(context,
+                                        listen: false)
+                                    .change(4);
+                              },
+                              child: Container(
+                                height: 100,
+                                width: constraints.maxWidth / 2 - 30,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                        height: 40,
+                                        child: AutoSizeText(
+                                          'Return',
+                                          style: TextStyle(
+                                              fontSize: 100,
+                                              color: Colors.white),
+                                        )),
+                                    Container(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                        alignment: Alignment.center,
+                                        height: 30,
+                                        child: AutoSizeText(
+                                          'Click here for return entry',
+                                          group: ditemsubtitlegroup,
+                                          textAlign: TextAlign.center,
+                                          maxLines: 2,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 100,
+                                          ),
+                                        )),
+                                  ],
                                 ),
-                              );
-                            }),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Color(0xff00B4DB),
+                                          Color(0xff0083B0)
+                                        ])),
+                              ),
+                            ),
+                            Expanded(child: Container()),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        height: 280,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: GridView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      childAspectRatio: _aspectRatio3,
+                                      mainAxisSpacing: 10,
+                                      crossAxisSpacing: 10),
+                              itemCount: items.length,
+                              itemBuilder: (context, i) {
+                                return Container(
+                                  margin: EdgeInsets.only(
+                                      top: 10, left: 5, right: 5),
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 5.0,
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: items[i].color == Colors.white
+                                              ? [Colors.white, Colors.white]
+                                              : [
+                                                  Color(0xff00B4DB),
+                                                  Color(0xff0083B0)
+                                                ])),
+                                  child: DashboardItem(
+                                    widgetResponsive: WidgetResponsive.desktop,
+                                    item: items[i],
+                                  ),
+                                );
+                              }),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
     });
   }
