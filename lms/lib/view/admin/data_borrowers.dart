@@ -89,9 +89,6 @@ class _DataBorrowersState extends State<DataBorrowers> {
                                 if (newValue == "Title") {
                                   filteredBooks!.sort((a, b) =>
                                       a.bookName!.compareTo(b.bookName!));
-                                } else if (newValue == "Author") {
-                                  filteredBooks!.sort(
-                                      (a, b) => a.author!.compareTo(b.author!));
                                 } else {
                                   filteredBooks!.sort((a, b) => a.serialNumber!
                                       .compareTo(b.serialNumber!));
@@ -101,7 +98,7 @@ class _DataBorrowersState extends State<DataBorrowers> {
                                 });
                               },
                               iconEnabledColor: Colors.blue[900],
-                              items: ["Title", "Author", "ID"]
+                              items: ["Title", "ID"]
                                   .map(
                                     (option) => DropdownMenuItem(
                                       child: Text(
@@ -166,7 +163,7 @@ class _DataBorrowersState extends State<DataBorrowers> {
                                             element.bookName!
                                                 .toLowerCase()
                                                 .contains(_searchResult) ||
-                                            element.author!
+                                            element.rollNumber!
                                                 .toLowerCase()
                                                 .contains(_searchResult))
                                         .toList();
@@ -184,68 +181,71 @@ class _DataBorrowersState extends State<DataBorrowers> {
                 width: width,
                 color: Colors.white,
                 child: SingleChildScrollView(
-                  child: DataTable(
-                    columns: const <DataColumn>[
-                      DataColumn(
-                        label: Text(
-                          'ID',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columns: const <DataColumn>[
+                        DataColumn(
+                          label: Text(
+                            'ID',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Roll Number',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                        DataColumn(
+                          label: Text(
+                            'Roll Number',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Title',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                        DataColumn(
+                          label: Text(
+                            'Title',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Issue Date',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                        DataColumn(
+                          label: Text(
+                            'Issue Date',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Due Date',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                        DataColumn(
+                          label: Text(
+                            'Due Date',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                    ],
-                    rows: filteredBooks!.map((book) {
-                      return DataRow(cells: [
-                        DataCell(Text(
-                          book.serialNumber.toString(),
-                        )),
-                        DataCell(Text(
-                          book.rollNumber.toString(),
-                        )),
-                        DataCell(Text(
-                          book.bookName.toString(),
-                        )),
-                        DataCell(Text(
-                          book.issueDate.toString(),
-                        )),
-                        DataCell(Text(
-                          book.dueDate.toString(),
-                        )),
-                      ]);
-                    }).toList(),
+                      ],
+                      rows: filteredBooks!.map((book) {
+                        return DataRow(cells: [
+                          DataCell(Text(
+                            book.serialNumber.toString(),
+                          )),
+                          DataCell(Text(
+                            book.rollNumber.toString(),
+                          )),
+                          DataCell(Text(
+                            book.bookName.toString(),
+                          )),
+                          DataCell(Text(
+                            book.issueDate.toString(),
+                          )),
+                          DataCell(Text(
+                            book.dueDate.toString(),
+                          )),
+                        ]);
+                      }).toList(),
+                    ),
                   ),
                 ),
               ),

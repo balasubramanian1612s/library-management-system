@@ -116,6 +116,27 @@ class _AdminSideBarState extends State<AdminSideBar> {
                 margin: EdgeInsets.only(bottom: 5),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
+                    color: menu.isSelectedSidebar == 5 ? Colors.white12 : null,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10))),
+                child: ListTile(
+                  onTap: () {
+                    setState(() {
+                      menu.change(5);
+                    });
+                  },
+                  leading: Icon(Icons.document_scanner, color: Colors.white),
+                  title: Text(
+                    'Returners',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 5),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
                     color: menu.isSelectedSidebar == 3 ? Colors.white12 : null,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),

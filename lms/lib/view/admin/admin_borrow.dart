@@ -261,21 +261,22 @@ class _AdminBorrowState extends State<AdminBorrow> {
       "AUTHOR": ds['AUTHOR'],
       "EDITION": ds['EDITION']
     }).then((value) {
+      dataBox!.put(
+        ds['BOOK_ID'].toString() + ds['ROLL_NO'].toString(),
+        BorrowedBookModel(
+            serialNumber: int.parse(bookidController.text),
+            dueDate: DateTime.now().add(Duration(days: 20)),
+            edition: ds['EDITION'],
+            issueDate: DateTime.now(),
+            rollNumber: rollnoController.text,
+            bookName: ds['TITLE'],
+            author: ds['AUTHOR']),
+      );
       Navigator.pop(context);
       bookidController.clear();
       rollnoController.clear();
     });
-    dataBox!.put(
-      ds['BOOK_ID'].toString() + ds['ROLL_NO'].toString(),
-      BorrowedBookModel(
-          serialNumber: ds['BOOK_ID'],
-          dueDate: (ds['DUE_DATE'] as Timestamp).toDate(),
-          edition: ds['EDITION'],
-          issueDate: (ds['ISSUE_DATE'] as Timestamp).toDate(),
-          rollNumber: ds['ROLL_NO'],
-          bookName: ds['TITLE'],
-          author: ds['AUTHOR']),
-    );
+
     Scaffold.of(context).showSnackBar(SnackBar(
       content: Text(
           'Ledger has been updated successfully. You can check in Borrow Ledger.'),

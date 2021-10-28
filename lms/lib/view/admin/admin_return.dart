@@ -434,7 +434,8 @@ class _AdminReturnState extends State<AdminReturn> {
                                             .collection("Borrow")
                                             .doc(qds.id)
                                             .delete();
-                                        borrowBox!.delete(book);
+                                        borrowBox!.delete(book.id +
+                                            qds['ROLL_NO'].toString());
                                         dataBox!.put(
                                             qds['BOOK_ID'].toString() +
                                                 qds['ROLL_NO'].toString() +

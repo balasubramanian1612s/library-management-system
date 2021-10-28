@@ -186,80 +186,84 @@ class _DataPageState extends State<DataPage> {
                 width: width,
                 color: Colors.white,
                 child: SingleChildScrollView(
-                  child: DataTable(
-                    columns: const <DataColumn>[
-                      DataColumn(
-                        label: Text(
-                          'ID',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columns: const <DataColumn>[
+                        DataColumn(
+                          label: Text(
+                            'ID',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Title',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                        DataColumn(
+                          label: Text(
+                            'Title',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Author',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                        DataColumn(
+                          label: Text(
+                            'Author',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Edition',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                        DataColumn(
+                          label: Text(
+                            'Edition',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Publisher',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
+                        DataColumn(
+                          label: Text(
+                            'Publisher',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                    ],
-                    rows: filteredBooks!.map((book) {
-                      return DataRow(cells: [
-                        DataCell(Text(
-                          book.serialNumber.toString(),
-                          overflow: TextOverflow.visible,
-                          softWrap: true,
-                        )),
-                        DataCell(
-                            Text(
-                              book.bookName.toString(),
-                            ),
-                            showEditIcon: edit, onTap: () async {
-                          updatedText = await showTextDialog(context,
-                              title: 'Title', value: book.bookName.toString());
-                          int foundIndex = booksList!.indexOf(book);
-                          booksList![foundIndex].bookName = updatedText;
-                          setState(() {});
-                        }),
-                        DataCell(Text(
-                          book.author.toString(),
-                        )),
-                        DataCell(Text(
-                          book.edition.toString(),
-                        )),
-                        DataCell(
-                            Text(
-                              book.publisherName.toString(),
-                            ),
-                            showEditIcon: edit),
-                      ]);
-                    }).toList(),
+                      ],
+                      rows: filteredBooks!.map((book) {
+                        return DataRow(cells: [
+                          DataCell(Text(
+                            book.serialNumber.toString(),
+                            overflow: TextOverflow.visible,
+                            softWrap: true,
+                          )),
+                          DataCell(
+                              Text(
+                                book.bookName.toString(),
+                              ),
+                              showEditIcon: edit, onTap: () async {
+                            updatedText = await showTextDialog(context,
+                                title: 'Title',
+                                value: book.bookName.toString());
+                            int foundIndex = booksList!.indexOf(book);
+                            booksList![foundIndex].bookName = updatedText;
+                            setState(() {});
+                          }),
+                          DataCell(Text(
+                            book.author.toString(),
+                          )),
+                          DataCell(Text(
+                            book.edition.toString(),
+                          )),
+                          DataCell(
+                              Text(
+                                book.publisherName.toString(),
+                              ),
+                              showEditIcon: edit),
+                        ]);
+                      }).toList(),
+                    ),
                   ),
                 ),
               ),
