@@ -255,8 +255,7 @@ class _AdminBorrowState extends State<AdminBorrow> {
       rollnoController.clear();
     });
     Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text(
-          'Ledger has been updated successfully. You can check in Borrow Ledger.'),
+      content: Text('Borrow successful. Ledger updated.'),
       backgroundColor: Colors.green,
     ));
     Provider.of<SideBarMenuModel>(context, listen: false).change(0);

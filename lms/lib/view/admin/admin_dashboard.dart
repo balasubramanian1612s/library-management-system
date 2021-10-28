@@ -1,6 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:lms/main.dart';
+import 'package:lms/model/hive/book_model.dart';
+import 'package:lms/model/hive/return_model.dart';
+import 'package:lms/model/hive/borrow_model.dart';
 import 'package:lms/model/side_bar_menu_model.dart';
 import 'package:lms/util/responsive.dart';
 import 'package:lms/view/admin/widgets/dashboard_item.dart';
@@ -16,38 +20,20 @@ class AdminDashboard extends StatefulWidget {
 }
 
 class _AdminDashboardState extends State<AdminDashboard> {
-  List<DItem> items = [
-    DItem(
-        title: '100',
-        subtitle: 'Total Number of Books',
-        onclick: () {},
-        image: 'assets/book.png',
-        color: Colors.white),
-    DItem(
-        title: '100',
-        subtitle: 'Total Number of Borrowers',
-        onclick: () {},
-        image: 'assets/borrow.png',
-        color: Colors.white),
-    DItem(
-        title: '100',
-        subtitle: 'Total Number of Return Expected',
-        onclick: () {},
-        image: 'assets/return.png',
-        color: Colors.white),
-    DItem(
-        title: '100',
-        subtitle: 'Total Number of Due',
-        onclick: () {},
-        image: 'assets/book.png',
-        color: Colors.white),
-    DItem(
-        title: '100',
-        subtitle: 'Total Number of Research Scholar Borrowed',
-        onclick: () {},
-        image: 'assets/book.png',
-        color: Colors.white)
-  ];
+  Box<BookModel>? booksDB;
+  Box<BorrowedBookModel>? borrowDB;
+  Box<ReturnBookModel>? returnDB;
+
+  List<DItem> items = [];
+
+  @override
+  void initState() {
+    booksDB = Hive.box<BookModel>('books');
+    borrowDB = Hive.box<BorrowedBookModel>('borrow');
+    returnDB = Hive.box<ReturnBookModel>('return');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var _crossAxisSpacing = 50;
@@ -64,6 +50,51 @@ class _AdminDashboardState extends State<AdminDashboard> {
             _crossAxisCount3;
     var cellHeight3 = 300;
     var _aspectRatio3 = _width3 / cellHeight3;
+
+    List<String> users = [];
+    int dueCount = 0;
+
+    borrowDB!.values.forEach((brwBook) {
+      if (!users.contains(brwBook.rollNumber)) {
+        users.add(brwBook.rollNumber!);
+      }
+      if (DateTime.now().isAfter(brwBook.dueDate!)) {
+        dueCount++;
+      }
+    });
+
+    items = [
+      DItem(
+          title: booksDB!.length.toString(),
+          subtitle: 'Books',
+          onclick: () {},
+          image: 'assets/book.png',
+          color: Colors.white),
+      DItem(
+          title: users.length.toString(),
+          subtitle: 'Users',
+          onclick: () {},
+          image: 'assets/borrow.png',
+          color: Colors.white),
+      DItem(
+          title: borrowDB!.length.toString(),
+          subtitle: 'Returns Expected',
+          onclick: () {},
+          image: 'assets/return.png',
+          color: Colors.white),
+      DItem(
+          title: dueCount.toString(),
+          subtitle: 'Books past due',
+          onclick: () {},
+          image: 'assets/book.png',
+          color: Colors.white),
+      DItem(
+          title: returnDB!.length.toString(),
+          subtitle: 'Returns recorded',
+          onclick: () {},
+          image: 'assets/return.png',
+          color: Colors.white)
+    ];
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
