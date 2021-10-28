@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:lms_student_user/model/hive/book_model.dart';
 import 'package:lms_student_user/model/side_bar_menu_model.dart';
 import 'package:lms_student_user/util/responsive.dart';
-import 'package:lms_student_user/view/admin/data_page.dart';
+import 'package:lms_student_user/view/admin/admin_return_history.dart';
 import 'package:provider/provider.dart';
 
+import 'admin_borrow_history.dart';
 import 'admin_side_bar.dart';
 
 class AdminHomeScreen extends StatefulWidget {
@@ -14,10 +13,8 @@ class AdminHomeScreen extends StatefulWidget {
 }
 
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
-  Box<BookModel>? dataBox;
-
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final sidebarDecoration = BoxDecoration(
+  final sidebarDecoration = const BoxDecoration(
       gradient: LinearGradient(
           colors: [Color(0xff00B4DB), Color(0xff0083B0)],
           begin: Alignment.topCenter,
@@ -25,8 +22,6 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 
   @override
   void initState() {
-    dataBox = Hive.box<BookModel>('books');
-    print('opened at admin');
     super.initState();
   }
 
@@ -67,7 +62,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                   onPressed: () {
                                     _scaffoldKey.currentState!.openDrawer();
                                   },
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.menu,
                                     color: Color(0xff00B4DB),
                                   ),
@@ -101,7 +96,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                           alignment: Alignment.topLeft,
                           child: AdminSideBar(),
                         ),
-                        Container(
+                        SizedBox(
                           width: width * 0.8,
                           child: getSelectedWidget(
                               menu.isSelectedSidebar, WidgetResponsive.desktop),
@@ -119,9 +114,11 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
   Widget getSelectedWidget(int val, WidgetResponsive responsive) {
     switch (val) {
       case 1:
-        return DataPage();
+        return const AdminBorrowHistory();
+      case 2:
+        return const AdminReturnHistory();
       default:
-        DataPage();
+        const AdminBorrowHistory();
     }
     return Container();
   }
