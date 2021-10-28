@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -37,11 +38,9 @@ class _DataPageState extends State<DataPage> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    double containerHeight = height * 0.06;
-    double containerWidth = width * 0.2;
 
     return Scaffold(
-      backgroundColor: Colors.black54,
+      backgroundColor: Colors.white30,
       body: Container(
         color: Colors.white,
         height: height,
@@ -49,7 +48,7 @@ class _DataPageState extends State<DataPage> {
         child: Container(
           height: height * 0.15,
           width: width,
-          color: Colors.black54,
+          color: Colors.white38,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -59,17 +58,6 @@ class _DataPageState extends State<DataPage> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    width: width * 0.06,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          edit = true;
-                        });
-                      },
-                      child: Text('Edit'),
-                    ),
-                  ),
                   Container(
                     width: width * 0.14,
                     decoration: BoxDecoration(
@@ -135,59 +123,66 @@ class _DataPageState extends State<DataPage> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: width * 0.005, vertical: 0),
-                    width: containerWidth,
-                    height: containerHeight,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(29.5)),
-                    child: TextField(
-                      controller: controller,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.grey,
+                      height: 85,
+                      width: width * 0.5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextField(
+                                controller: controller,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  hintText: 'Search',
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(30))),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(Icons.clear),
+                                    onPressed: () {
+                                      controller.clear();
+                                      setState(() {
+                                        filteredBooks = booksList!;
+                                        _searchResult = '';
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.blue[800],
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  _searchResult = controller.text.toLowerCase();
+                                  setState(() {
+                                    filteredBooks = booksList!
+                                        .where((element) =>
+                                            element.bookName!
+                                                .toLowerCase()
+                                                .contains(_searchResult) ||
+                                            element.author!
+                                                .toLowerCase()
+                                                .contains(_searchResult))
+                                        .toList();
+                                  });
+                                },
+                              ),
+                            )
+                          ],
                         ),
-                        border: InputBorder.none,
-                        hintText: "Search..",
-                        // suffix: haveContent
-                        //     ? Padding(
-                        //         padding: const EdgeInsets.all(8.0),
-                        //         child: IconButton(
-                        //           icon: Icon(
-                        //             Icons.clear_rounded,
-                        //             color: Colors.grey,
-                        //           ),
-                        //           onPressed: () {
-                        //             setState(() {
-                        //               filteredBooks = booksList;
-                        //               _searchResult = '';
-                        //               controller.clear();
-                        //               haveContent = false;
-                        //             });
-                        //           },
-                        //         ),
-                        //       )
-                        // : null,
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          _searchResult = value.toLowerCase();
-                          haveContent = true;
-                        });
-                        filteredBooks = booksList!
-                            .where((element) =>
-                                element.bookName!
-                                    .toLowerCase()
-                                    .contains(_searchResult) ||
-                                element.author!
-                                    .toLowerCase()
-                                    .contains(_searchResult))
-                            .toList();
-                      },
-                    ),
-                  ),
+                      )),
                 ],
               ),
               Container(
