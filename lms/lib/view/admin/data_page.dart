@@ -23,6 +23,7 @@ class _DataPageState extends State<DataPage> {
   List<BookModel>? booksList;
   List<BookModel>? filteredBooks;
   String updatedText = '';
+  String selectedOption = "ID";
 
   @override
   void initState() {
@@ -38,6 +39,7 @@ class _DataPageState extends State<DataPage> {
     double width = MediaQuery.of(context).size.width;
     double containerHeight = height * 0.06;
     double containerWidth = width * 0.2;
+
     return Scaffold(
       backgroundColor: Colors.black54,
       body: Container(
@@ -54,15 +56,83 @@ class _DataPageState extends State<DataPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        edit = true;
-                      });
-                    },
-                    child: Text('Edit'),
+                  Container(
+                    width: width * 0.06,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          edit = true;
+                        });
+                      },
+                      child: Text('Edit'),
+                    ),
+                  ),
+                  Container(
+                    width: width * 0.14,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Sort by',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Container(
+                          width: width * 0.06,
+                          child: Theme(
+                            data: Theme.of(context).copyWith(
+                              canvasColor: Colors.blue.shade400,
+                            ),
+                            child: DropdownButton(
+                                value: selectedOption,
+                                icon: Padding(
+                                  padding: EdgeInsets.only(left: width * 0.007),
+                                  child: Icon(
+                                    Icons.arrow_circle_down_sharp,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                underline: Container(
+                                  height: 0,
+                                ),
+                                onChanged: (String? newValue) {
+                                  if (newValue == "Title") {
+                                    filteredBooks!.sort((a, b) =>
+                                        a.bookName!.compareTo(b.bookName!));
+                                  } else if (newValue == "Author") {
+                                    filteredBooks!.sort((a, b) =>
+                                        a.author!.compareTo(b.author!));
+                                  } else {
+                                    filteredBooks!.sort((a, b) => a
+                                        .serialNumber!
+                                        .compareTo(b.serialNumber!));
+                                  }
+                                  setState(() {
+                                    selectedOption = newValue!;
+                                  });
+                                },
+                                iconEnabledColor: Colors.blue[900],
+                                items: ["Title", "Author", "ID"]
+                                    .map(
+                                      (option) => DropdownMenuItem(
+                                        child: Text(
+                                          option,
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        value: option,
+                                      ),
+                                    )
+                                    .toList()),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(
