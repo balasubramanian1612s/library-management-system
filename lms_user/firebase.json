@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "lms-psg-student",
     "public": "build/web",
     "ignore": [
       "firebase.json",

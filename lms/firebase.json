@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "library-management-psg",
     "public": "build/web",
     "ignore": [
       "firebase.json",
