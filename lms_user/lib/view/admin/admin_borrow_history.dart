@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:lms_student_user/model/borrowed_book.dart';
 
 class AdminBorrowHistory extends StatefulWidget {
-  const AdminBorrowHistory({Key? key}) : super(key: key);
+  String rollno;
+  AdminBorrowHistory(this.rollno);
 
   @override
   _AdminBorrowHistoryState createState() => _AdminBorrowHistoryState();
@@ -28,7 +29,7 @@ class _AdminBorrowHistoryState extends State<AdminBorrowHistory> {
   Future getBooksFromDB() async {
     QuerySnapshot<Map<String, dynamic>> qs = await FirebaseFirestore.instance
         .collection("Borrow")
-        .where('ROLL_NO', isEqualTo: "19Z237")
+        .where('ROLL_NO', isEqualTo: widget.rollno)
         .get();
     qs.docs.forEach((element) {
       Timestamp issue = element.data()['ISSUE_DATE'];
@@ -53,14 +54,13 @@ class _AdminBorrowHistoryState extends State<AdminBorrowHistory> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.black54,
+      backgroundColor: Color(0xffced9de),
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(),
             )
           : LayoutBuilder(builder: (context, constraints) {
               double width = constraints.maxWidth;
-
               return Container(
                 color: Colors.white,
                 height: height,
@@ -154,7 +154,7 @@ class _AdminBorrowHistoryState extends State<AdminBorrowHistory> {
                                                   a.author.compareTo(b.author));
                                             } else {
                                               filteredBooks.sort((a, b) =>
-                                                  a.id.compareTo(b.id));
+                                                  b.id.compareTo(a.id));
                                             }
                                             setState(() {
                                               selectedOption = newValue!;
@@ -177,72 +177,6 @@ class _AdminBorrowHistoryState extends State<AdminBorrowHistory> {
                                   ],
                                 ),
                               ),
-                              // Container(
-                              //   width: width * 0.3,
-                              //   decoration: BoxDecoration(
-                              //     color: Colors.blue,
-                              //     borderRadius: BorderRadius.circular(10.0),
-                              //   ),
-                              //   child: Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceEvenly,
-                              //     children: [
-                              //       Text(
-                              //         'Sort by',
-                              //         style: TextStyle(color: Colors.white),
-                              //       ),
-                              //       Container(
-                              //         child: Theme(
-                              //           data: Theme.of(context).copyWith(
-                              //             canvasColor: Colors.blue.shade400,
-                              //           ),
-                              //           child: DropdownButton(
-                              //               value: selectedOption,
-                              //               icon: Padding(
-                              //                 padding: EdgeInsets.only(
-                              //                     left: width * 0.007),
-                              //                 child: Icon(
-                              //                   Icons.arrow_circle_down_sharp,
-                              //                   color: Colors.white,
-                              //                 ),
-                              //               ),
-                              //               underline: Container(
-                              //                 height: 0,
-                              //               ),
-                              //               onChanged: (String? newValue) {
-                              // if (newValue == "Title") {
-                              //   filteredBooks.sort((a, b) =>
-                              //       a.name.compareTo(b.name));
-                              // } else if (newValue == "Author") {
-                              //   filteredBooks.sort((a, b) => a
-                              //       .author
-                              //       .compareTo(b.author));
-                              // } else {
-                              //   filteredBooks.sort((a, b) =>
-                              //       a.id.compareTo(b.id));
-                              // }
-                              // setState(() {
-                              //   selectedOption = newValue!;
-                              // });
-                              //               },
-                              //               iconEnabledColor: Colors.blue[900],
-                              //               items: ["Title", "Author", "ID"]
-                              //                   .map(
-                              //                     (option) => DropdownMenuItem(
-                              //                       child: Text(
-                              //                         option,
-                              //                         style: TextStyle(
-                              //                             color: Colors.white),
-                              //                       ),
-                              //                       value: option,
-                              //                     ),
-                              //                   )
-                              //                   .toList()),
-                              //         ),
-                              //       )
-                              //     ],
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),

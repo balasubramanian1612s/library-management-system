@@ -8,6 +8,8 @@ import 'admin_borrow_history.dart';
 import 'admin_side_bar.dart';
 
 class AdminHomeScreen extends StatefulWidget {
+  String rollnumber;
+  AdminHomeScreen(this.rollnumber);
   @override
   _AdminHomeScreenState createState() => _AdminHomeScreenState();
 }
@@ -114,11 +116,11 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
   Widget getSelectedWidget(int val, WidgetResponsive responsive) {
     switch (val) {
       case 1:
-        return const AdminBorrowHistory();
+        return AdminBorrowHistory(widget.rollnumber);
       case 2:
-        return const AdminReturnHistory();
+        return AdminReturnHistory(widget.rollnumber);
       default:
-        const AdminBorrowHistory();
+        AdminBorrowHistory(widget.rollnumber);
     }
     return Container();
   }

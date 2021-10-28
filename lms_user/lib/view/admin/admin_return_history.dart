@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:lms_student_user/model/hive/return_model.dart';
 
 class AdminReturnHistory extends StatefulWidget {
-  const AdminReturnHistory({Key? key}) : super(key: key);
+  String rollno;
+  AdminReturnHistory(this.rollno);
 
   @override
   _AdminReturnHistoryState createState() => _AdminReturnHistoryState();
@@ -28,7 +29,7 @@ class _AdminReturnHistoryState extends State<AdminReturnHistory> {
   Future getBooksFromDB() async {
     QuerySnapshot<Map<String, dynamic>> qs = await FirebaseFirestore.instance
         .collection("Return")
-        .where('ROLL_NO', isEqualTo: "19Z237")
+        .where('ROLL_NO', isEqualTo: widget.rollno)
         .get();
     qs.docs.forEach((element) {
       Timestamp issue = element.data()['ISSUE_DATE'];
@@ -47,25 +48,6 @@ class _AdminReturnHistoryState extends State<AdminReturnHistory> {
 
     setState(() {
       filteredBooks = booksList;
-      filteredBooks = filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks +
-          filteredBooks;
       isLoading = false;
     });
   }
@@ -73,9 +55,8 @@ class _AdminReturnHistoryState extends State<AdminReturnHistory> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      backgroundColor: Colors.black54,
+      backgroundColor: Color(0xffced9de),
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(),
@@ -177,9 +158,9 @@ class _AdminReturnHistoryState extends State<AdminReturnHistory> {
                                                   .author!
                                                   .compareTo(b.author!));
                                             } else {
-                                              filteredBooks.sort((a, b) => a
+                                              filteredBooks.sort((a, b) => b
                                                   .serialNumber!
-                                                  .compareTo(b.serialNumber!));
+                                                  .compareTo(a.serialNumber!));
                                             }
                                             setState(() {
                                               selectedOption = newValue!;
@@ -202,72 +183,6 @@ class _AdminReturnHistoryState extends State<AdminReturnHistory> {
                                   ],
                                 ),
                               ),
-                              // Container(
-                              //   width: width * 0.3,
-                              //   decoration: BoxDecoration(
-                              //     color: Colors.blue,
-                              //     borderRadius: BorderRadius.circular(10.0),
-                              //   ),
-                              //   child: Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceEvenly,
-                              //     children: [
-                              //       Text(
-                              //         'Sort by',
-                              //         style: TextStyle(color: Colors.white),
-                              //       ),
-                              //       Container(
-                              //         child: Theme(
-                              //           data: Theme.of(context).copyWith(
-                              //             canvasColor: Colors.blue.shade400,
-                              //           ),
-                              //           child: DropdownButton(
-                              //               value: selectedOption,
-                              //               icon: Padding(
-                              //                 padding: EdgeInsets.only(
-                              //                     left: width * 0.007),
-                              //                 child: Icon(
-                              //                   Icons.arrow_circle_down_sharp,
-                              //                   color: Colors.white,
-                              //                 ),
-                              //               ),
-                              //               underline: Container(
-                              //                 height: 0,
-                              //               ),
-                              //               onChanged: (String? newValue) {
-                              // if (newValue == "Title") {
-                              //   filteredBooks.sort((a, b) =>
-                              //       a.name.compareTo(b.name));
-                              // } else if (newValue == "Author") {
-                              //   filteredBooks.sort((a, b) => a
-                              //       .author
-                              //       .compareTo(b.author));
-                              // } else {
-                              //   filteredBooks.sort((a, b) =>
-                              //       a.id.compareTo(b.id));
-                              // }
-                              // setState(() {
-                              //   selectedOption = newValue!;
-                              // });
-                              //               },
-                              //               iconEnabledColor: Colors.blue[900],
-                              //               items: ["Title", "Author", "ID"]
-                              //                   .map(
-                              //                     (option) => DropdownMenuItem(
-                              //                       child: Text(
-                              //                         option,
-                              //                         style: TextStyle(
-                              //                             color: Colors.white),
-                              //                       ),
-                              //                       value: option,
-                              //                     ),
-                              //                   )
-                              //                   .toList()),
-                              //         ),
-                              //       )
-                              //     ],
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),

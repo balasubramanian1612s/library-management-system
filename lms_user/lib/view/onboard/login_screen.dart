@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lms_student_user/view/admin/admin_home_screen.dart';
@@ -8,28 +10,36 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Color(0xff1c1427),
-        title: Text('Student Portal'),
+        backgroundColor: Colors.white,
+        title: Text(
+          'Student Portal',
+          style: GoogleFonts.aBeeZee(
+              fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
         centerTitle: true,
-        actions: [
-          IconButton(
-              icon: Icon(Icons.supervised_user_circle_sharp), onPressed: () {})
-        ],
+        elevation: 0,
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Card(
             shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
+              borderRadius: BorderRadius.circular(10.0),
             ),
             elevation: 10,
             child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.blue.shade100,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [Color(0xff00B4DB), Color(0xff0083B0)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter),
                   borderRadius: BorderRadius.all(Radius.circular(15))),
               height: 500,
               width: 400,
@@ -42,50 +52,47 @@ class _LoginPageState extends State<LoginPage> {
                     style: GoogleFonts.aBeeZee(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xff1c1427)),
+                        color: Colors.white),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Theme(
-                      data: ThemeData(primaryColor: Color(0xff1c1427)),
+                      data: ThemeData(primaryColor: Colors.white),
                       child: TextField(
-                        cursorColor: Color(0xff1c1427),
-                        // controller: nameController,
-                        decoration: InputDecoration(
+                        cursorColor: Colors.white,
+                        controller: nameController,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          enabledBorder: OutlineInputBorder(),
+                          focusColor: Colors.white,
                           border: OutlineInputBorder(),
                           labelText: 'College ID',
+                          floatingLabelStyle: TextStyle(color: Colors.white),
                         ),
-                        // onChanged: (text) {
-                        //   setState(() {
-                        //     fullName = text;
-                        //     //you can access nameController in its scope to get
-                        //     // the value of text entered as shown below
-                        //     //fullName = nameController.text;
-                        //   });
-                        // },
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 20.0),
                     child: Theme(
-                      data: ThemeData(primaryColor: Color(0xff1c1427)),
+                      data: ThemeData(primaryColor: Colors.white),
                       child: TextField(
-                        cursorColor: Color(0xff1c1427),
-                        // controller: nameController,
+                        controller: passController,
+                        style: const TextStyle(color: Colors.white),
+                        cursorColor: Colors.white,
                         obscureText: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          enabledBorder: OutlineInputBorder(),
                           border: OutlineInputBorder(),
                           labelText: 'Password',
+                          floatingLabelStyle: TextStyle(color: Colors.white),
                         ),
-                        // onChanged: (text) {
-                        //   setState(() {
-                        //     fullName = text;
-                        //     //you can access nameController in its scope to get
-                        //     // the value of text entered as shown below
-                        //     //fullName = nameController.text;
-                        //   });
-                        // },
                       ),
                     ),
                   ),
@@ -93,26 +100,38 @@ class _LoginPageState extends State<LoginPage> {
                     height: 40,
                     width: 200,
                     child: RaisedButton.icon(
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                         onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AdminHomeScreen()));
+                          if (passController.text.toUpperCase().compareTo(
+                                  nameController.text.toUpperCase()) ==
+                              0) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AdminHomeScreen(
+                                        nameController.text.toUpperCase())));
+                          } else {
+                            _scaffoldKey.currentState!
+                                .showSnackBar(const SnackBar(
+                              content: Text(
+                                'Please check the ID and Password.',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: Colors.red,
+                            ));
+                          }
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.done,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
-                        color: Color(0xff1c1427),
+                        color: Colors.white,
                         label: Text(
                           'Submit',
                           style: GoogleFonts.aBeeZee(
-                              // fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                              fontWeight: FontWeight.bold, color: Colors.black),
                         )),
                   )
                 ],
