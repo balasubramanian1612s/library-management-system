@@ -27,6 +27,7 @@ class _AdminReturnState extends State<AdminReturn> {
   QuerySnapshot<Map<String, dynamic>>? qs;
   Box<ReturnBookModel>? dataBox;
   Box<BorrowedBookModel>? borrowBox;
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey();
 
   @override
   void initState() {
@@ -38,6 +39,7 @@ class _AdminReturnState extends State<AdminReturn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _globalKey,
       body: LayoutBuilder(builder: (context, constraints) {
         double height = constraints.maxHeight - 50;
         return Column(
@@ -468,7 +470,8 @@ class _AdminReturnState extends State<AdminReturn> {
                                       totalFineAmount = 0;
                                       books = [];
                                     });
-                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                    _globalKey.currentState!
+                                        .showSnackBar(SnackBar(
                                       content: Text(
                                           'Ledger has been updated successfully. You can check in Return Ledger.'),
                                       backgroundColor: Colors.green,
