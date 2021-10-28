@@ -1,34 +1,32 @@
-import 'dart:html';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hive/hive.dart';
 import 'package:lms/model/hive/book_model.dart';
+import 'package:lms/model/hive/borrow_model.dart';
 import 'package:lms/view/admin/widgets/text_dialog_widget.dart';
 
-class DataPage extends StatefulWidget {
-  const DataPage({Key? key}) : super(key: key);
+class DataBorrowers extends StatefulWidget {
+  const DataBorrowers({Key? key}) : super(key: key);
 
   @override
-  _DataPageState createState() => _DataPageState();
+  _DataBorrowersState createState() => _DataBorrowersState();
 }
 
-class _DataPageState extends State<DataPage> {
+class _DataBorrowersState extends State<DataBorrowers> {
   bool edit = false;
   bool haveContent = false;
 
-  Box<BookModel>? dataBox;
+  Box<BorrowedBookModel>? dataBox;
   TextEditingController controller = TextEditingController();
   String _searchResult = '';
-  List<BookModel>? booksList;
-  List<BookModel>? filteredBooks;
+  List<BorrowedBookModel>? booksList;
+  List<BorrowedBookModel>? filteredBooks;
   String updatedText = '';
   String selectedOption = "ID";
 
   @override
   void initState() {
-    dataBox = Hive.box<BookModel>("books");
+    dataBox = Hive.box<BorrowedBookModel>("borrow");
     booksList = dataBox!.values.toList();
     filteredBooks = booksList!;
     super.initState();
@@ -198,6 +196,14 @@ class _DataPageState extends State<DataPage> {
                       ),
                       DataColumn(
                         label: Text(
+                          'Roll Number',
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
                           'Title',
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
@@ -206,7 +212,7 @@ class _DataPageState extends State<DataPage> {
                       ),
                       DataColumn(
                         label: Text(
-                          'Author',
+                          'Issue Date',
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -214,15 +220,7 @@ class _DataPageState extends State<DataPage> {
                       ),
                       DataColumn(
                         label: Text(
-                          'Edition',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Publisher',
+                          'Due Date',
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
@@ -233,31 +231,19 @@ class _DataPageState extends State<DataPage> {
                       return DataRow(cells: [
                         DataCell(Text(
                           book.serialNumber.toString(),
-                          overflow: TextOverflow.visible,
-                          softWrap: true,
-                        )),
-                        DataCell(
-                            Text(
-                              book.bookName.toString(),
-                            ),
-                            showEditIcon: edit, onTap: () async {
-                          updatedText = await showTextDialog(context,
-                              title: 'Title', value: book.bookName.toString());
-                          int foundIndex = booksList!.indexOf(book);
-                          booksList![foundIndex].bookName = updatedText;
-                          setState(() {});
-                        }),
-                        DataCell(Text(
-                          book.author.toString(),
                         )),
                         DataCell(Text(
-                          book.edition.toString(),
+                          book.rollNumber.toString(),
                         )),
-                        DataCell(
-                            Text(
-                              book.publisherName.toString(),
-                            ),
-                            showEditIcon: edit),
+                        DataCell(Text(
+                          book.bookName.toString(),
+                        )),
+                        DataCell(Text(
+                          book.issueDate.toString(),
+                        )),
+                        DataCell(Text(
+                          book.dueDate.toString(),
+                        )),
                       ]);
                     }).toList(),
                   ),
@@ -270,73 +256,3 @@ class _DataPageState extends State<DataPage> {
     );
   }
 }
-
-// Widget buildDataTable() {
-//   final columns = ['ID','Title','Total Books','Available'];
-
-//   return DataTable(columns: getColumns(columns), rows: getRows(books))
-// }
-
-
-
-// List<DataColumn> getColumns(List<String> columns) => columns.map((String column) => DataColumn(label: Text(column))).toList();
-
-
-
-// const <DataRow>[
-//             DataRow(
-//               cells: <DataCell>[
-//                 DataCell(Text('12345')),
-//                 DataCell(Text('wings of fire')),
-//                 DataCell(Text('Kalam')),
-//                 DataCell(Text('100')),
-//                 DataCell(
-//                   Text('10'),
-//                 )
-//               ],
-//             ),
-//             DataRow(
-//               cells: <DataCell>[
-//                 DataCell(Text('12345')),
-//                 DataCell(Text('wings of fire')),
-//                 DataCell(Text('Kalam')),
-//                 DataCell(Text('100')),
-//                 DataCell(Text('10'))
-//               ],
-//             ),
-//             DataRow(
-//               cells: <DataCell>[
-//                 DataCell(Text('12345')),
-//                 DataCell(Text('wings of fire')),
-//                 DataCell(Text('Kalam')),
-//                 DataCell(Text('100')),
-//                 DataCell(Text('10'))
-//               ],
-//             ),
-//             DataRow(
-//               cells: <DataCell>[
-//                 DataCell(Text('12345')),
-//                 DataCell(Text('wings of fire')),
-//                 DataCell(Text('Kalam')),
-//                 DataCell(Text('100')),
-//                 DataCell(Text('10'))
-//               ],
-//             ),
-//             DataRow(
-//               cells: <DataCell>[
-//                 DataCell(Text('12345')),
-//                 DataCell(Text('wings of fire')),
-//                 DataCell(Text('Kalam')),
-//                 DataCell(Text('100')),
-//                 DataCell(Text('10'))
-//               ],
-//             ),
-//           ],
-
-
-// IconButton(
-//                             alignment: Alignment.centerRight,
-//                             icon: Icon(Icons.search),
-//                             color: Colors.blue,
-//                             onPressed: () {},
-//                           ),
