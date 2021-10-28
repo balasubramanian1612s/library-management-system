@@ -22,7 +22,7 @@ class _DataBorrowersState extends State<DataBorrowers> {
   List<BorrowedBookModel>? booksList;
   List<BorrowedBookModel>? filteredBooks;
   String updatedText = '';
-  String selectedOption = "ID";
+  String selectedOption = "Issue";
 
   @override
   void initState() {
@@ -86,19 +86,19 @@ class _DataBorrowersState extends State<DataBorrowers> {
                                 height: 0,
                               ),
                               onChanged: (String? newValue) {
-                                if (newValue == "Title") {
+                                if (newValue == "Issue") {
+                                  filteredBooks!.sort((a, b) =>
+                                      a.dueDate!.isAfter(b.dueDate!) ? 1 : -1);
+                                } else {
                                   filteredBooks!.sort((a, b) =>
                                       a.bookName!.compareTo(b.bookName!));
-                                } else {
-                                  filteredBooks!.sort((a, b) => a.serialNumber!
-                                      .compareTo(b.serialNumber!));
                                 }
                                 setState(() {
                                   selectedOption = newValue!;
                                 });
                               },
                               iconEnabledColor: Colors.blue[900],
-                              items: ["Title", "ID"]
+                              items: ["Issue", "Title"]
                                   .map(
                                     (option) => DropdownMenuItem(
                                       child: Text(
