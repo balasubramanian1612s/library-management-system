@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hive/hive.dart';
 import 'package:lms/model/hive/book_model.dart';
+import 'package:lms/model/hive/return_model.dart';
 
 class DataReturners extends StatefulWidget {
   const DataReturners({Key? key}) : super(key: key);
@@ -14,17 +15,17 @@ class _DataReturnersState extends State<DataReturners> {
   bool edit = false;
   bool haveContent = false;
 
-  Box<BookModel>? dataBox;
+  Box<ReturnBookModel>? dataBox;
   TextEditingController controller = TextEditingController();
   String _searchResult = '';
-  List<BookModel>? booksList;
-  List<BookModel>? filteredBooks;
+  List<ReturnBookModel>? booksList;
+  List<ReturnBookModel>? filteredBooks;
   String updatedText = '';
   String selectedOption = "ID";
 
   @override
   void initState() {
-    dataBox = Hive.box<BookModel>("books");
+    dataBox = Hive.box<ReturnBookModel>("return");
     booksList = dataBox!.values.toList();
     filteredBooks = booksList!;
     super.initState();
@@ -239,18 +240,20 @@ class _DataReturnersState extends State<DataReturners> {
                           book.serialNumber.toString(),
                         )),
                         DataCell(Text(
+                          book.rollNumber.toString(),
+                        )),
+                        DataCell(Text(
                           book.bookName.toString(),
                         )),
                         DataCell(Text(
-                          book.author.toString(),
+                          book.issueDate.toString(),
                         )),
                         DataCell(Text(
-                          book.edition.toString(),
+                          book.dueDate.toString(),
                         )),
                         DataCell(Text(
-                          book.publisherName.toString(),
+                          book.dueFee.toString(),
                         )),
-                        DataCell(Text("20")),
                       ]);
                     }).toList(),
                   ),

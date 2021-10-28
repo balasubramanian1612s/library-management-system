@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hive/hive.dart';
 import 'package:lms/model/hive/book_model.dart';
+import 'package:lms/model/hive/borrow_model.dart';
 import 'package:lms/view/admin/widgets/text_dialog_widget.dart';
 
 class DataBorrowers extends StatefulWidget {
@@ -15,17 +16,17 @@ class _DataBorrowersState extends State<DataBorrowers> {
   bool edit = false;
   bool haveContent = false;
 
-  Box<BookModel>? dataBox;
+  Box<BorrowedBookModel>? dataBox;
   TextEditingController controller = TextEditingController();
   String _searchResult = '';
-  List<BookModel>? booksList;
-  List<BookModel>? filteredBooks;
+  List<BorrowedBookModel>? booksList;
+  List<BorrowedBookModel>? filteredBooks;
   String updatedText = '';
   String selectedOption = "ID";
 
   @override
   void initState() {
-    dataBox = Hive.box<BookModel>("books");
+    dataBox = Hive.box<BorrowedBookModel>("borrow");
     booksList = dataBox!.values.toList();
     filteredBooks = booksList!;
     super.initState();
@@ -232,16 +233,16 @@ class _DataBorrowersState extends State<DataBorrowers> {
                           book.serialNumber.toString(),
                         )),
                         DataCell(Text(
+                          book.rollNumber.toString(),
+                        )),
+                        DataCell(Text(
                           book.bookName.toString(),
                         )),
                         DataCell(Text(
-                          book.author.toString(),
+                          book.issueDate.toString(),
                         )),
                         DataCell(Text(
-                          book.edition.toString(),
-                        )),
-                        DataCell(Text(
-                          book.publisherName.toString(),
+                          book.dueDate.toString(),
                         )),
                       ]);
                     }).toList(),
