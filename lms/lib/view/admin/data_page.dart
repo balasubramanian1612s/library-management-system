@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -37,19 +38,17 @@ class _DataPageState extends State<DataPage> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    double containerHeight = height * 0.06;
-    double containerWidth = width * 0.2;
 
     return Scaffold(
-      backgroundColor: Colors.black54,
+      backgroundColor: Colors.white30,
       body: Container(
         color: Colors.white,
         height: height,
         width: width,
         child: Container(
-          height: height * 0.15,
+          height: height * 0.2,
           width: width,
-          color: Colors.black54,
+          color: Colors.white38,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -60,18 +59,7 @@ class _DataPageState extends State<DataPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    width: width * 0.06,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          edit = true;
-                        });
-                      },
-                      child: Text('Edit'),
-                    ),
-                  ),
-                  Container(
-                    width: width * 0.14,
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                     decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(10.0),
@@ -83,115 +71,118 @@ class _DataPageState extends State<DataPage> {
                           'Sort by',
                           style: TextStyle(color: Colors.white),
                         ),
-                        Container(
-                          width: width * 0.06,
-                          child: Theme(
-                            data: Theme.of(context).copyWith(
-                              canvasColor: Colors.blue.shade400,
-                            ),
-                            child: DropdownButton(
-                                value: selectedOption,
-                                icon: Padding(
-                                  padding: EdgeInsets.only(left: width * 0.007),
-                                  child: Icon(
-                                    Icons.arrow_circle_down_sharp,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                underline: Container(
-                                  height: 0,
-                                ),
-                                onChanged: (String? newValue) {
-                                  if (newValue == "Title") {
-                                    filteredBooks!.sort((a, b) =>
-                                        a.bookName!.compareTo(b.bookName!));
-                                  } else if (newValue == "Author") {
-                                    filteredBooks!.sort((a, b) =>
-                                        a.author!.compareTo(b.author!));
-                                  } else {
-                                    filteredBooks!.sort((a, b) => a
-                                        .serialNumber!
-                                        .compareTo(b.serialNumber!));
-                                  }
-                                  setState(() {
-                                    selectedOption = newValue!;
-                                  });
-                                },
-                                iconEnabledColor: Colors.blue[900],
-                                items: ["Title", "Author", "ID"]
-                                    .map(
-                                      (option) => DropdownMenuItem(
-                                        child: Text(
-                                          option,
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        value: option,
-                                      ),
-                                    )
-                                    .toList()),
+                        SizedBox(
+                          width: width * 0.005,
+                        ),
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            canvasColor: Colors.blue.shade400,
                           ),
+                          child: DropdownButton(
+                              value: selectedOption,
+                              icon: Icon(
+                                Icons.arrow_circle_down_sharp,
+                                color: Colors.white,
+                              ),
+                              underline: Container(
+                                height: 0,
+                              ),
+                              onChanged: (String? newValue) {
+                                if (newValue == "Title") {
+                                  filteredBooks!.sort((a, b) =>
+                                      a.bookName!.compareTo(b.bookName!));
+                                } else if (newValue == "Author") {
+                                  filteredBooks!.sort(
+                                      (a, b) => a.author!.compareTo(b.author!));
+                                } else {
+                                  filteredBooks!.sort((a, b) => a.serialNumber!
+                                      .compareTo(b.serialNumber!));
+                                }
+                                setState(() {
+                                  selectedOption = newValue!;
+                                });
+                              },
+                              iconEnabledColor: Colors.blue[900],
+                              items: ["Title", "Author", "ID"]
+                                  .map(
+                                    (option) => DropdownMenuItem(
+                                      child: Text(
+                                        option,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      value: option,
+                                    ),
+                                  )
+                                  .toList()),
                         )
                       ],
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: width * 0.005, vertical: 0),
-                    width: containerWidth,
-                    height: containerHeight,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(29.5)),
-                    child: TextField(
-                      controller: controller,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.grey,
+                      height: height * 0.08,
+                      width: width * 0.5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextField(
+                                controller: controller,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  hintText: 'Search',
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(30))),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(Icons.clear),
+                                    onPressed: () {
+                                      controller.clear();
+                                      setState(() {
+                                        filteredBooks = booksList!;
+                                        _searchResult = '';
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.blue[800],
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  _searchResult = controller.text.toLowerCase();
+                                  setState(() {
+                                    filteredBooks = booksList!
+                                        .where((element) =>
+                                            element.bookName!
+                                                .toLowerCase()
+                                                .contains(_searchResult) ||
+                                            element.author!
+                                                .toLowerCase()
+                                                .contains(_searchResult))
+                                        .toList();
+                                  });
+                                },
+                              ),
+                            )
+                          ],
                         ),
-                        border: InputBorder.none,
-                        hintText: "Search..",
-                        // suffix: haveContent
-                        //     ? Padding(
-                        //         padding: const EdgeInsets.all(8.0),
-                        //         child: IconButton(
-                        //           icon: Icon(
-                        //             Icons.clear_rounded,
-                        //             color: Colors.grey,
-                        //           ),
-                        //           onPressed: () {
-                        //             setState(() {
-                        //               filteredBooks = booksList;
-                        //               _searchResult = '';
-                        //               controller.clear();
-                        //               haveContent = false;
-                        //             });
-                        //           },
-                        //         ),
-                        //       )
-                        // : null,
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          _searchResult = value.toLowerCase();
-                          haveContent = true;
-                        });
-                        filteredBooks = booksList!
-                            .where((element) =>
-                                element.bookName!
-                                    .toLowerCase()
-                                    .contains(_searchResult) ||
-                                element.author!
-                                    .toLowerCase()
-                                    .contains(_searchResult))
-                            .toList();
-                      },
-                    ),
-                  ),
+                      )),
                 ],
               ),
               Container(
-                height: height * 0.85,
+                height: height * 0.8,
                 width: width,
                 color: Colors.white,
                 child: SingleChildScrollView(
