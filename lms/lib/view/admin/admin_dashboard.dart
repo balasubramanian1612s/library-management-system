@@ -51,13 +51,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
     var cellHeight3 = 300;
     var _aspectRatio3 = _width3 / cellHeight3;
 
-    List<String> users = [];
     int dueCount = 0;
 
     borrowDB!.values.forEach((brwBook) {
-      if (!users.contains(brwBook.rollNumber)) {
-        users.add(brwBook.rollNumber!);
-      }
       if (DateTime.now().isAfter(brwBook.dueDate!)) {
         dueCount++;
       }
@@ -66,34 +62,22 @@ class _AdminDashboardState extends State<AdminDashboard> {
     items = [
       DItem(
           title: booksDB!.length.toString(),
-          subtitle: 'Books',
+          subtitle: 'BOOKS',
           onclick: () {},
           image: 'assets/book.png',
           color: Colors.white),
       DItem(
-          title: users.length.toString(),
-          subtitle: 'Users',
+          title: borrowDB!.length.toString(),
+          subtitle: 'BOOKS BORROWED',
           onclick: () {},
           image: 'assets/borrow.png',
           color: Colors.white),
       DItem(
-          title: borrowDB!.length.toString(),
-          subtitle: 'Returns Expected',
-          onclick: () {},
-          image: 'assets/return.png',
-          color: Colors.white),
-      DItem(
           title: dueCount.toString(),
-          subtitle: 'Books past due',
+          subtitle: 'RETURNS PAST DUE',
           onclick: () {},
           image: 'assets/book.png',
           color: Colors.white),
-      DItem(
-          title: returnDB!.length.toString(),
-          subtitle: 'Returns recorded',
-          onclick: () {},
-          image: 'assets/return.png',
-          color: Colors.white)
     ];
 
     double height = MediaQuery.of(context).size.height;
@@ -406,6 +390,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             itemBuilder: (context, i) {
                               return Container(
                                 decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.0),
                                     gradient: LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
@@ -568,6 +553,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             itemBuilder: (context, i) {
                               return Container(
                                 decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.0),
                                     gradient: LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
