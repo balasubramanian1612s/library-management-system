@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hive/hive.dart';
 import 'package:lms/model/hive/book_model.dart';
 import 'package:lms/view/admin/widgets/text_dialog_widget.dart';
@@ -12,6 +15,8 @@ class DataPage extends StatefulWidget {
 
 class _DataPageState extends State<DataPage> {
   bool edit = false;
+  bool haveContent = false;
+
   Box<BookModel>? dataBox;
   TextEditingController controller = TextEditingController();
   String _searchResult = '';
@@ -31,7 +36,8 @@ class _DataPageState extends State<DataPage> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
+    double containerHeight = height * 0.06;
+    double containerWidth = width * 0.2;
     return Scaffold(
       backgroundColor: Colors.black54,
       body: Container(
@@ -59,40 +65,57 @@ class _DataPageState extends State<DataPage> {
                     child: Text('Edit'),
                   ),
                   Container(
-                    height: height * 0.06,
-                    width: width * 0.2,
-                    child: Card(
-                      child: ListTile(
-                        leading: Icon(Icons.search),
-                        title: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'Search', border: InputBorder.none),
-                          onChanged: (value) {
-                            setState(() {
-                              _searchResult = value.toLowerCase();
-                            });
-                            filteredBooks = booksList!
-                                .where((element) =>
-                                    element.bookName!
-                                        .toLowerCase()
-                                        .contains(_searchResult) ||
-                                    element.author!
-                                        .toLowerCase()
-                                        .contains(_searchResult))
-                                .toList();
-                          },
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 0.005, vertical: 0),
+                    width: containerWidth,
+                    height: containerHeight,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(29.5)),
+                    child: TextField(
+                      controller: controller,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.grey,
                         ),
-                        trailing: IconButton(
-                          icon: Icon(Icons.cancel),
-                          onPressed: () {
-                            setState(() {
-                              controller.clear();
-                              _searchResult = '';
-                              filteredBooks = booksList!;
-                            });
-                          },
-                        ),
+                        border: InputBorder.none,
+                        hintText: "Search..",
+                        // suffix: haveContent
+                        //     ? Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: IconButton(
+                        //           icon: Icon(
+                        //             Icons.clear_rounded,
+                        //             color: Colors.grey,
+                        //           ),
+                        //           onPressed: () {
+                        //             setState(() {
+                        //               filteredBooks = booksList;
+                        //               _searchResult = '';
+                        //               controller.clear();
+                        //               haveContent = false;
+                        //             });
+                        //           },
+                        //         ),
+                        //       )
+                        // : null,
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          _searchResult = value.toLowerCase();
+                          haveContent = true;
+                        });
+                        filteredBooks = booksList!
+                            .where((element) =>
+                                element.bookName!
+                                    .toLowerCase()
+                                    .contains(_searchResult) ||
+                                element.author!
+                                    .toLowerCase()
+                                    .contains(_searchResult))
+                            .toList();
+                      },
                     ),
                   ),
                 ],
