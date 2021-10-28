@@ -105,9 +105,9 @@ class _AdminSideBarState extends State<AdminSideBar> {
                       menu.change(2);
                     });
                   },
-                  leading: Icon(Icons.document_scanner, color: Colors.white),
+                  leading: Icon(Icons.my_library_books, color: Colors.white),
                   title: Text(
-                    'Borrowers',
+                    'Books Issued',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -126,9 +126,9 @@ class _AdminSideBarState extends State<AdminSideBar> {
                       menu.change(5);
                     });
                   },
-                  leading: Icon(Icons.document_scanner, color: Colors.white),
+                  leading: Icon(Icons.loop_rounded, color: Colors.white),
                   title: Text(
-                    'Returners',
+                    'Books Returned',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -147,7 +147,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
                       menu.change(3);
                     });
                   },
-                  leading: Icon(Icons.document_scanner, color: Colors.white),
+                  leading: Icon(Icons.get_app, color: Colors.white),
                   title: Text(
                     'Borrow',
                     style: TextStyle(color: Colors.white),
@@ -168,7 +168,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
                       menu.change(4);
                     });
                   },
-                  leading: Icon(Icons.document_scanner, color: Colors.white),
+                  leading: Icon(Icons.upload, color: Colors.white),
                   title: Text(
                     'Return',
                     style: TextStyle(color: Colors.white),
