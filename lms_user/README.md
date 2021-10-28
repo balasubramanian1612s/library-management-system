@@ -1,4 +1,4 @@
-# lms_user
+# lms_student_user
 
 A new Flutter project.
 

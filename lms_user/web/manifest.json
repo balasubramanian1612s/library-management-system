@@ -1,6 +1,6 @@
 {
-    "name": "lms_user",
-    "short_name": "lms_user",
+    "name": "lms_student_user",
+    "short_name": "lms_student_user",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
