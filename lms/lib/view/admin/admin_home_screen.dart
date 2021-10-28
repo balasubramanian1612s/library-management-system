@@ -6,7 +6,9 @@ import 'package:lms/util/responsive.dart';
 import 'package:lms/view/admin/admin_borrow.dart';
 import 'package:lms/view/admin/admin_dashboard.dart';
 import 'package:lms/view/admin/admin_return.dart';
+import 'package:lms/view/admin/data_borrowers.dart';
 import 'package:lms/view/admin/data_page.dart';
+import 'package:lms/view/admin/data_returners.dart';
 import 'package:provider/provider.dart';
 
 import 'admin_side_bar.dart';
@@ -131,6 +133,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         return AdminBorrow();
       case 4:
         return AdminReturn();
+      case 2:
+        return DataBorrowers();
+      case 5:
+        return DataReturners();
       default:
         AdminDashboard(
           widgetResponsive: WidgetResponsive.desktop,

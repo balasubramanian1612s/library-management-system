@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lms_student_user/main.dart';
 import 'package:lms_student_user/model/side_bar_menu_model.dart';
 import 'package:lms_student_user/util/my_image.dart';
+import 'package:lms_student_user/view/onboard/login_screen.dart';
 import 'package:provider/provider.dart';
 
 class AdminSideBar extends StatefulWidget {
@@ -87,6 +88,26 @@ class _AdminSideBarState extends State<AdminSideBar> {
                   leading: Icon(Icons.document_scanner, color: Colors.white),
                   title: Text(
                     'My Return History',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 5),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: menu.isSelectedSidebar == 3 ? Colors.white12 : null,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10))),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  leading: Icon(Icons.document_scanner, color: Colors.white),
+                  title: Text(
+                    'Logout',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

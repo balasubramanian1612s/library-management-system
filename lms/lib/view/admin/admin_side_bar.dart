@@ -58,7 +58,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
                         topLeft: Radius.circular(10),
                         bottomLeft: Radius.circular(10))),
                 child: ListTile(
-                  leading: Icon(Icons.document_scanner, color: Colors.white),
+                  leading: Icon(Icons.dashboard, color: Colors.white),
                   onTap: () {
                     setState(() {
                       menu.change(0);
@@ -84,7 +84,7 @@ class _AdminSideBarState extends State<AdminSideBar> {
                       menu.change(1);
                     });
                   },
-                  leading: Icon(Icons.document_scanner, color: Colors.white),
+                  leading: Icon(Icons.menu_book_sharp, color: Colors.white),
                   title: Text(
                     'Books',
                     style: TextStyle(color: Colors.white),
@@ -108,6 +108,27 @@ class _AdminSideBarState extends State<AdminSideBar> {
                   leading: Icon(Icons.document_scanner, color: Colors.white),
                   title: Text(
                     'Borrowers',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 5),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: menu.isSelectedSidebar == 5 ? Colors.white12 : null,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10))),
+                child: ListTile(
+                  onTap: () {
+                    setState(() {
+                      menu.change(5);
+                    });
+                  },
+                  leading: Icon(Icons.document_scanner, color: Colors.white),
+                  title: Text(
+                    'Returners',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

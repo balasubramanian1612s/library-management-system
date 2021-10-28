@@ -1,8 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lms/model/book.dart';
 import 'package:lms/model/borrowed_book.dart';
+import 'package:lms/model/hive/borrow_model.dart';
+import 'package:lms/model/hive/return_model.dart';
 import 'package:lms/model/side_bar_menu_model.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +25,16 @@ class _AdminReturnState extends State<AdminReturn> {
   int totalFineAmount = 0;
   List<BorrowedBook> books = [];
   QuerySnapshot<Map<String, dynamic>>? qs;
+  Box<ReturnBookModel>? dataBox;
+  Box<BorrowedBookModel>? borrowBox;
+
+  @override
+  void initState() {
+    dataBox = Hive.box<ReturnBookModel>('return');
+    borrowBox = Hive.box<BorrowedBookModel>('borrow');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -421,6 +434,27 @@ class _AdminReturnState extends State<AdminReturn> {
                                             .collection("Borrow")
                                             .doc(qds.id)
                                             .delete();
+                                        borrowBox!.delete(book.id +
+                                            qds['ROLL_NO'].toString());
+                                        dataBox!.put(
+                                            qds['BOOK_ID'].toString() +
+                                                qds['ROLL_NO'].toString() +
+                                                (qds['ISSUE_DATE'] as Timestamp)
+                                                    .toDate()
+                                                    .toIso8601String(),
+                                            ReturnBookModel(
+                                                dueFee: fineAmount,
+                                                serialNumber: qds['BOOK_ID'],
+                                                dueDate: (qds['DUE_DATE']
+                                                        as Timestamp)
+                                                    .toDate(),
+                                                edition: qds['EDITION'],
+                                                issueDate: (qds['ISSUE_DATE']
+                                                        as Timestamp)
+                                                    .toDate(),
+                                                rollNumber: qds['ROLL_NO'],
+                                                bookName: qds['TITLE'],
+                                                author: qds['AUTHOR']));
                                       }
                                     });
                                     Navigator.pop(context);

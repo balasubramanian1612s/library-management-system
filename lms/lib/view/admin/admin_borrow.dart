@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lms/model/hive/book_model.dart';
+import 'package:lms/model/hive/borrow_model.dart';
 import 'package:lms/model/side_bar_menu_model.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +17,14 @@ class AdminBorrow extends StatefulWidget {
 class _AdminBorrowState extends State<AdminBorrow> {
   TextEditingController rollnoController = new TextEditingController();
   TextEditingController bookidController = new TextEditingController();
+  Box<BorrowedBookModel>? dataBox;
+
+  @override
+  void initState() {
+    dataBox = Hive.box<BorrowedBookModel>('borrow');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -250,10 +261,22 @@ class _AdminBorrowState extends State<AdminBorrow> {
       "AUTHOR": ds['AUTHOR'],
       "EDITION": ds['EDITION']
     }).then((value) {
+      dataBox!.put(
+        ds['BOOK_ID'].toString() + ds['ROLL_NO'].toString(),
+        BorrowedBookModel(
+            serialNumber: int.parse(bookidController.text),
+            dueDate: DateTime.now().add(Duration(days: 20)),
+            edition: ds['EDITION'],
+            issueDate: DateTime.now(),
+            rollNumber: rollnoController.text,
+            bookName: ds['TITLE'],
+            author: ds['AUTHOR']),
+      );
       Navigator.pop(context);
       bookidController.clear();
       rollnoController.clear();
     });
+
     Scaffold.of(context).showSnackBar(SnackBar(
       content: Text(
           'Ledger has been updated successfully. You can check in Borrow Ledger.'),
