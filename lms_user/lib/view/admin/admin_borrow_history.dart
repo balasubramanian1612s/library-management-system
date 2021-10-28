@@ -71,50 +71,43 @@ class _AdminBorrowHistoryState extends State<AdminBorrowHistory> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    //   children: [
-                    //     Container(
-                    //       height: height * 0.06,
-                    //       width: width * 0.2,
-                    //       child: Card(
-                    //         child: ListTile(
-                    //           leading: Icon(Icons.search),
-                    //           title: TextField(
-                    //             decoration: InputDecoration(
-                    //                 hintText: 'Search', border: InputBorder.none),
-                    //             onChanged: (value) {
-                    //               setState(() {
-                    //                 _searchResult = value.toLowerCase();
-                    //               });
-                    //               filteredBooks = booksList
-                    //                   .where((element) =>
-                    //                       element.name
-                    //                           .toLowerCase()
-                    //                           .contains(_searchResult) ||
-                    //                       element.author
-                    //                           .toLowerCase()
-                    //                           .contains(_searchResult))
-                    //                   .toList();
-                    //             },
-                    //           ),
-                    //           trailing: IconButton(
-                    //             icon: Icon(Icons.cancel),
-                    //             onPressed: () {
-                    //               setState(() {
-                    //                 controller.clear();
-                    //                 _searchResult = '';
-                    //                 filteredBooks = booksList;
-                    //               });
-                    //             },
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+                    SizedBox(
+                      height: height * 0.1,
+                      width: width,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10.0, right: 10),
+                          child: Expanded(
+                              child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                _searchResult = value.toLowerCase();
+                              });
+                              filteredBooks = booksList
+                                  .where((element) =>
+                                      element.name
+                                          .toLowerCase()
+                                          .contains(_searchResult) ||
+                                      element.author
+                                          .toLowerCase()
+                                          .contains(_searchResult))
+                                  .toList();
+                            },
+                            style: const TextStyle(color: Colors.black),
+                            decoration: const InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                hintText: 'Search',
+                                suffixIcon: Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                )),
+                          )),
+                        ),
+                      ),
+                    ),
                     Container(
-                      height: height * 0.85,
+                      height: height * 0.9,
                       width: width,
                       color: Colors.white,
                       child: SingleChildScrollView(
