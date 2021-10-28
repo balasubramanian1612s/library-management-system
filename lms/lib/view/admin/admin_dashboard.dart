@@ -432,6 +432,21 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ],
                       ),
                     ),
+                    height < 650
+                        ? Container(
+                            height: 0,
+                          )
+                        : Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
                       height: 100,
                       padding: EdgeInsets.only(
@@ -440,6 +455,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       ),
                       child: Row(
                         children: [
+                          Expanded(child: Container()),
                           InkWell(
                             onTap: () {
                               Provider.of<SideBarMenuModel>(context,
@@ -447,9 +463,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                   .change(3);
                             },
                             child: Container(
-                              padding: EdgeInsets.all(10),
                               height: 100,
-                              width: constraints.maxWidth / 2 - 15,
+                              width: constraints.maxWidth / 2 - 30,
                               child: Column(
                                 children: [
                                   Container(
@@ -478,13 +493,15 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                 ],
                               ),
                               decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
                                   gradient: LinearGradient(
                                       begin: Alignment.topCenter,
                                       end: Alignment.bottomCenter,
                                       colors: [
-                                    Color(0xff00B4DB),
-                                    Color(0xff0083B0)
-                                  ])),
+                                        Color(0xff00B4DB),
+                                        Color(0xff0083B0)
+                                      ])),
                             ),
                           ),
                           Expanded(child: Container()),
@@ -495,9 +512,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                   .change(4);
                             },
                             child: Container(
-                              padding: EdgeInsets.all(10),
                               height: 100,
-                              width: constraints.maxWidth / 2 - 15,
+                              width: constraints.maxWidth / 2 - 30,
                               child: Column(
                                 children: [
                                   Container(
@@ -526,23 +542,30 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                 ],
                               ),
                               decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
                                   gradient: LinearGradient(
                                       begin: Alignment.topCenter,
                                       end: Alignment.bottomCenter,
                                       colors: [
-                                    Color(0xff00B4DB),
-                                    Color(0xff0083B0)
-                                  ])),
+                                        Color(0xff00B4DB),
+                                        Color(0xff0083B0)
+                                      ])),
                             ),
                           ),
+                          Expanded(child: Container()),
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
-                      height: constraints.maxHeight - 200,
+                      height: 280,
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
