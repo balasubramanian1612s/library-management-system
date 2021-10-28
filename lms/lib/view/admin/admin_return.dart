@@ -473,14 +473,14 @@ class _AdminReturnState extends State<AdminReturn> {
                                     _globalKey.currentState!
                                         .showSnackBar(SnackBar(
                                       content: Text(
-                                          'Ledger has been updated successfully. You can check in Return Ledger.'),
+                                          'Return successful. Ledger updated.'),
                                       backgroundColor: Colors.green,
                                     ));
                                     Provider.of<SideBarMenuModel>(context,
                                             listen: false)
                                         .change(0);
                                   },
-                                  child: Text('Returned, Submit!'),
+                                  child: Text('Return'),
                                 ),
                               ),
                             ),
