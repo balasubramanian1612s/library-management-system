@@ -459,6 +459,12 @@ class _AdminReturnState extends State<AdminReturn> {
                                                 author: qds['AUTHOR']));
                                       }
                                     });
+                                    _globalKey.currentState!
+                                        .showSnackBar(SnackBar(
+                                      content: Text(
+                                          'Return successful. Ledger updated.'),
+                                      backgroundColor: Colors.green,
+                                    ));
                                     Navigator.pop(context);
                                     setState(() {
                                       isLoading = false;
@@ -470,12 +476,7 @@ class _AdminReturnState extends State<AdminReturn> {
                                       totalFineAmount = 0;
                                       books = [];
                                     });
-                                    _globalKey.currentState!
-                                        .showSnackBar(SnackBar(
-                                      content: Text(
-                                          'Return successful. Ledger updated.'),
-                                      backgroundColor: Colors.green,
-                                    ));
+
                                     Provider.of<SideBarMenuModel>(context,
                                             listen: false)
                                         .change(0);

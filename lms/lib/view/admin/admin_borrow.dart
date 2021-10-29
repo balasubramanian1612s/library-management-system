@@ -262,7 +262,7 @@ class _AdminBorrowState extends State<AdminBorrow> {
       "EDITION": ds['EDITION']
     }).then((value) {
       dataBox!.put(
-        ds['BOOK_ID'].toString() + ds['ROLL_NO'].toString(),
+        (ds['BOOK_ID'].toString() + rollnoController.text),
         BorrowedBookModel(
             serialNumber: int.parse(bookidController.text),
             dueDate: DateTime.now().add(Duration(days: 20)),
