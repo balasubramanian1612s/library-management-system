@@ -32,8 +32,17 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Modules
 
--   Admin login
--   Student login
+<ul>
+<li class="has-line-data" data-line-start="0" data-line-end="5">Admin<br>
+- Dashboard<br>
+- Borrow Portal<br>
+- Return Portal<br>
+- Books, Issued, Returned Tables</li>
+<li class="has-line-data" data-line-start="5" data-line-end="9">Student<br>
+- Login<br>
+- Borrow History<br>
+- Return History</li>
+</ul>
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Technology Stack Used
 
