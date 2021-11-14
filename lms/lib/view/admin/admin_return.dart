@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lms/model/book.dart';
 import 'package:lms/model/borrowed_book.dart';
 import 'package:lms/model/hive/borrow_model.dart';
 import 'package:lms/model/hive/return_model.dart';
