@@ -1,6 +1,6 @@
 # Library Management System
 
-#### [](https://github.com/balasubramanian1612s/library-management-system)An web portal for automating various manual processes done by librarian.
+#### [](https://github.com/balasubramanian1612s/library-management-system)A web portal designed to to manage manual functions of a library. The software helps to manage the entire library operations from maintaining book records to issue & returning books.
 
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Abstract
