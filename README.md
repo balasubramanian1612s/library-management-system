@@ -58,25 +58,41 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
    &nbsp; side_bar_menu_model.dart - change-notifier model for functioning of the sidebar
 
 **/util** - contains utility widgets (or) components	
+
  	data_fetch.dart -  page for initial data fetch and seeding of the local database.
+	
 	 my_image.dart - custom widget to display a network image 
+	 
 responsive.dart - custom widget to render different pages for different display sizes and display orientations
 
 **/view** - contains all pages in the application
+
 	**/admin** - contains all the pages available for the admin to use
+	
 		**/widgets** - contains the custom widgets designed for various purposes.
+		
     dashboard_item.dart - widget to render a tile in the  admin_dashboard.dart page
+    
     text_dialog_widget.dart - widget to display a overlay dialog with some text in it
+    
   admin_borrow.dart - page to borrow a book and add the corresponding entry to DB
+  
   admin_dashboard.dart - page to display the admin dashboard
+  
   admin_home_screen.dart - scaffold page upon which the dashboard page is constructed
+  
   admin_return.dart - page to return a book and add the corresponding entry to DB
+  
   admin_side_bar.dart - widget to render a side-bar in the application. Integrated into the admin_home_screen.dart page
+  
   data_borrowers.dart - page to display the record of borrowed books. 
+  
   data_page.dart - page to display the books available to borrow from the library
+  
   data_returners.dart - page to display the record  of returned books.
 
 **/onboard** - contains the pages to be rendered during the onboarding procedure
+
 		login_screen.dart - page for login process
 
 **main.dart** - contains the root widget, starting from where, the entire application is configured & run
