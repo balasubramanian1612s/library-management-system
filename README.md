@@ -7,7 +7,14 @@
 
 [![Library Management System](https://camo.githubusercontent.com/b0b27c0370b1e5703414256e9600171519dd0821a14490bcd4adb8bc6d0db48f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6962726172792d2d6d616e6167656d656e742d73797374656d2d6f72616e67652e7376673f7374796c653d666c61742d737175617265)](https://camo.githubusercontent.com/b0b27c0370b1e5703414256e9600171519dd0821a14490bcd4adb8bc6d0db48f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6962726172792d2d6d616e6167656d656e742d73797374656d2d6f72616e67652e7376673f7374796c653d666c61742d737175617265)  [![DBMS Project](https://camo.githubusercontent.com/53f339485c37034683c8e900ed2fa019ded3ef3a4f2b9eee0a39336f39c5fe9a/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f44424d532d70726f6a6563742d79656c6c6f77677265656e2e7376673f7374796c653d666c61742d737175617265)](https://camo.githubusercontent.com/53f339485c37034683c8e900ed2fa019ded3ef3a4f2b9eee0a39336f39c5fe9a/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f44424d532d70726f6a6563742d79656c6c6f77677265656e2e7376673f7374796c653d666c61742d737175617265)  [![Open Source Programming](https://camo.githubusercontent.com/ec4284a371fa5de0e05f04fce5282b2d555160425257e80b3f2eda7971829e6d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6f70656e2d2d736f757263652d70726f6772616d6d696e672d6666363962342e7376673f7374796c653d666c61742d737175617265)](https://camo.githubusercontent.com/ec4284a371fa5de0e05f04fce5282b2d555160425257e80b3f2eda7971829e6d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6f70656e2d2d736f757263652d70726f6772616d6d696e672d6666363962342e7376673f7374796c653d666c61742d737175617265)
 
-Manual process of keeping student records, book records, account details, managing employee is very difficult. There are various problems also faced by the student in library such as finding any particular book, information whether book is available or not, for what time this book will be available.. To eliminate this manual system,  **Library Management System**  has been developed.
+## [](https://github.com/balasubramanian1612s/library-management-system)Introduction
+Manual process of keeping book records, account details is very difficult. There are various problems also faced by the student in library such as finding any particular book, information whether book is available or not, for what time this book will be available. To eliminate this manual system,  **Library Management System**  has been developed.
+
+A college library management is a project that manages and stores books information electronically according to students' needs. The system helps both students and library managers to keep a constant track of all the books available in the library.
+
+ It becomes necessary for colleges to keep a continuous check on the books issued and returned and even calculate fines. This task if carried out manually will be tedious and includes chances of mistakes. These errors are avoided by allowing the system to calculate fine.
+
+Thus this system reduces manual work to a great extent allows smooth flow of library activities by removing chances of errors in the details.
 
 
 
