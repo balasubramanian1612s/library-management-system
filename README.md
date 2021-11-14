@@ -44,12 +44,18 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)File Wise Description
 **/model** - contains database and class models
+
  &nbsp; **/hive** - blueprints for local database implemented using HIVE
-   book_model.dart - model to store a book
-   borrow_model.dart - model to store a borrow entry
-   return_model.dart - model to store a return entry
-  book.dart - class-model to store a book retrieved from the DB
- 	side_bar_menu_model.dart - change-notifier model for functioning of the sidebar
+ 
+   &nbsp;&nbsp; book_model.dart - model to store a book
+   
+   &nbsp;&nbsp; borrow_model.dart - model to store a borrow entry
+   
+   &nbsp;&nbsp; return_model.dart - model to store a return entry
+  
+   &nbsp; book.dart - class-model to store a book retrieved from the DB
+   
+   &nbsp; side_bar_menu_model.dart - change-notifier model for functioning of the sidebar
 
 **/util** - contains utility widgets (or) components	
  	data_fetch.dart -  page for initial data fetch and seeding of the local database.
