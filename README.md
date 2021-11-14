@@ -43,22 +43,22 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
 -   Database -  **Firebase - Firestore**
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)File Wise Description
-/model - contains database and class models
-  /hive - blueprints for local database implemented using HIVE
+**/model** - contains database and class models
+  **/hive** - blueprints for local database implemented using HIVE
    book_model.dart - model to store a book
    borrow_model.dart - model to store a borrow entry
    return_model.dart - model to store a return entry
   book.dart - class-model to store a book retrieved from the DB
  	side_bar_menu_model.dart - change-notifier model for functioning of the sidebar
 
-/util - contains utility widgets (or) components	
+**/util** - contains utility widgets (or) components	
  	data_fetch.dart -  page for initial data fetch and seeding of the local database.
 	 my_image.dart - custom widget to display a network image 
 responsive.dart - custom widget to render different pages for different display sizes and display orientations
 
-/view - contains all pages in the application
-	/admin - contains all the pages available for the admin to use
-		/widgets - contains the custom widgets designed for various purposes.
+**/view** - contains all pages in the application
+	**/admin** - contains all the pages available for the admin to use
+		**/widgets** - contains the custom widgets designed for various purposes.
     dashboard_item.dart - widget to render a tile in the  admin_dashboard.dart page
     text_dialog_widget.dart - widget to display a overlay dialog with some text in it
   admin_borrow.dart - page to borrow a book and add the corresponding entry to DB
