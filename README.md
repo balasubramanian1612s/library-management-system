@@ -96,14 +96,14 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
     - **student\_side\_bar.dart** - widget to render a side-bar in the application. Integrated into the student_home_screen.dart page
 - **main.dart** - contains the root widget, starting from where, the entire application is configured &amp; run
 
-## [](https://github.com/balasubramanian1612s/library-management-system)Demo Video
-https://bit.ly/3ordYfK
+## [](https://github.com/balasubramanian1612s/library-management-system)Demonstration Video
+A [demonstration](https://bit.ly/3ordYfK) of the product illustrating its functionalities was cataloged.
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Final Presentation Document
-https://github.com/balasubramanian1612s/library-management-system/blob/master/Documents/Final%20Presentation%20-%20Group%202.pdf
+The required [presentation](https://github.com/balasubramanian1612s/library-management-system/blob/master/Documents/Final%20Presentation%20-%20Group%202.pdf) was made in conjunction with the product developed.
 
-## [](https://github.com/balasubramanian1612s/library-management-system)SRS Document
-https://github.com/balasubramanian1612s/library-management-system/blob/c3c549497a9d4c645e9aa2be9f115e75f3708339/Documents/SRS-Group-2.pdf
+## [](https://github.com/balasubramanian1612s/library-management-system)Software Requirements Specification Document
+The required [SRS](https://github.com/balasubramanian1612s/library-management-system/blob/c3c549497a9d4c645e9aa2be9f115e75f3708339/Documents/SRS-Group-2.pdf) has been compiled and documented.
 
-## [](https://github.com/balasubramanian1612s/library-management-system)SDD Document
-https://github.com/balasubramanian1612s/library-management-system/blob/8b24b772f7768475dacd349d4c95460b3ac5b109/Documents/SDD%20-%20LMS.pdf
+## [](https://github.com/balasubramanian1612s/library-management-system)Software Design Document Document
+The required [SDD](https://github.com/balasubramanian1612s/library-management-system/blob/8b24b772f7768475dacd349d4c95460b3ac5b109/Documents/SDD%20-%20LMS.pdf) has been compiled and documented.
