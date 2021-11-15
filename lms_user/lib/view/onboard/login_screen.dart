@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lms_student_user/view/admin/admin_home_screen.dart';
+import 'package:lms_student_user/view/student/student_home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
