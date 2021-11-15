@@ -80,11 +80,17 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
     - **login\_screen.dart** - page for login process
 - **main.dart** - contains the root widget, starting from where, the entire application is configured &amp; run
 
+**STUDENT-SIDE APPLICATION**
+
+- /view - contains all pages in the application
+  - /student - contains all the pages available for the student to use
+    - /widgets - contains the custom widgets designed for various purposes.
+      - **dashboard\_item.dart** - widget to render a tile in the _ **admin\_dashboard.dart** _ page
+      - **text\_dialog\_widget.dart** - widget to display a overlay dialog with some text in it
+    - **student\_student\_borrow\_history.dart** - page to display the history of books he/she has borrowed from the library
+    - **student\_home\_screen.dart** - page to display the student dashboard
+    - **student\_return\_history.dart** - page to display the history of books he/she has returned to the library
+    - **student\_side\_bar.dart** - widget to render a side-bar in the application. Integrated into the student_home_screen.dart page
+
 ## [](https://github.com/balasubramanian1612s/library-management-system)Demo Video
 https://bit.ly/3nasF7o
-
-## [](https://github.com/balasubramanian1612s/library-management-system)Final Presentation Document
-https://github.com/balasubramanian1612s/library-management-system/blob/c3c549497a9d4c645e9aa2be9f115e75f3708339/Documents/Final-Presentation%20-Group-2.pdf
-
-## [](https://github.com/balasubramanian1612s/library-management-system)SRS Document
-https://github.com/balasubramanian1612s/library-management-system/blob/c3c549497a9d4c645e9aa2be9f115e75f3708339/Documents/SRS-Group-2.pdf
