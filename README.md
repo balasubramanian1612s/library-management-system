@@ -107,3 +107,12 @@ The required [SRS](https://github.com/balasubramanian1612s/library-management-sy
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Software Design Document Document
 The required [SDD](https://github.com/balasubramanian1612s/library-management-system/blob/8b24b772f7768475dacd349d4c95460b3ac5b109/Documents/SDD%20-%20LMS.pdf) has been compiled and documented.
+
+## [](https://github.com/balasubramanian1612s/library-management-system)Contributors
+ - 19Z215 - Gunaal R, [@GunaalR](https://github.com/GunaalR)
+ - 19Z218 - Johanna Smriti, [@johannasmriti](https://github.com/johannasmriti)
+ - 19Z225 - Keerthna M, [@keerthna-manikandan](https://github.com/keerthna-manikandan)
+ - 19Z237 - Balasubramanian S, [@balasubramanian1612s](https://github.com/balasubramanian1612s)
+ - 19Z246 - Sri Raja Vignesh S, [@sriraja2001](https://github.com/sriraja2001)
+ - 19Z259 - Vikneshwar A, [@VikneshwarVr](https://github.com/VikneshwarVr)
+
