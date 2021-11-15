@@ -53,7 +53,7 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)File Wise Description
 
-**ADMIN-SIDE APPLICATION**
+>ADMIN-SIDE APPLICATION
 
 - /model - contains database and class models
   - /hive - blueprints for local database implemented using HIVE
@@ -83,7 +83,7 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
     - **login\_screen.dart** - page for login process
 - **main.dart** - contains the root widget, starting from where, the entire application is configured &amp; run
 
-**STUDENT-SIDE APPLICATION**
+>STUDENT-SIDE APPLICATION
 
 - /view - contains all pages in the application
   - /student - contains all the pages available for the student to use
