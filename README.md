@@ -82,3 +82,9 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Demo Video
 https://bit.ly/3nasF7o
+
+## [](https://github.com/balasubramanian1612s/library-management-system)Final Presentation Document
+https://github.com/balasubramanian1612s/library-management-system/blob/c3c549497a9d4c645e9aa2be9f115e75f3708339/Documents/Final-Presentation%20-Group-2.pdf
+
+## [](https://github.com/balasubramanian1612s/library-management-system)SRS Document
+https://github.com/balasubramanian1612s/library-management-system/blob/c3c549497a9d4c645e9aa2be9f115e75f3708339/Documents/SRS-Group-2.pdf
