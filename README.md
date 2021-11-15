@@ -52,6 +52,9 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
 -   Database -  **Firebase - Firestore**
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)File Wise Description
+
+**ADMIN-SIDE APPLICATION**
+
 - /model - contains database and class models
   - /hive - blueprints for local database implemented using HIVE
     - **book\_model.dart** - model to store a book
@@ -91,6 +94,7 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
     - **student\_home\_screen.dart** - page to display the student dashboard
     - **student\_return\_history.dart** - page to display the history of books he/she has returned to the library
     - **student\_side\_bar.dart** - widget to render a side-bar in the application. Integrated into the student_home_screen.dart page
+- **main.dart** - contains the root widget, starting from where, the entire application is configured &amp; run
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Demo Video
 https://bit.ly/3nasF7o
