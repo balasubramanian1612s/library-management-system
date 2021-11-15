@@ -1,6 +1,6 @@
 # Library Management System
 
-#### [](https://github.com/balasubramanian1612s/library-management-system)An web portal for automating various manual processes done by librarian.
+#### [](https://github.com/balasubramanian1612s/library-management-system)A web portal designed to to manage manual functions of a library. The software helps to manage the entire library operations from maintaining book records to issue & returning books.
 
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Abstract
@@ -32,8 +32,17 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Modules
 
--   Admin login
--   Student login
+<ul>
+<li class="has-line-data" data-line-start="0" data-line-end="5">Admin<br>
+- Dashboard<br>
+- Borrow Portal<br>
+- Return Portal<br>
+- Books, Issued, Returned Tables</li>
+<li class="has-line-data" data-line-start="5" data-line-end="9">Student<br>
+- Login<br>
+- Borrow History<br>
+- Return History</li>
+</ul>
 
 ## [](https://github.com/balasubramanian1612s/library-management-system)Technology Stack Used
 
@@ -42,4 +51,34 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
 -   Processing -  **Python**
 -   Database -  **Firebase - Firestore**
 
-**Demo Video** - https://bit.ly/3nasF7o
+## [](https://github.com/balasubramanian1612s/library-management-system)File Wise Description
+- /model - contains database and class models
+  - /hive - blueprints for local database implemented using HIVE
+    - **book\_model.dart** - model to store a book
+    - **borrow\_model.dart** - model to store a borrow entry
+    - **return\_model.dart** - model to store a return entry
+  - **book.dart** - class-model to store a book retrieved from the DB
+  - **side\_bar\_menu\_model.dart** - change-notifier model for functioning of the sidebar
+- /util - contains utility widgets (or) components
+  - data\_fetch.dart - page for initial data fetch and seeding of the local database.
+  - my\_image.dart - custom widget to display a network image
+  - responsive.dart - custom widget to render different pages for different display sizes and display orientations
+- /view - contains all pages in the application
+  - /admin - contains all the pages available for the admin to use
+    - /widgets - contains the custom widgets designed for various purposes.
+      - **dashboard\_item.dart** - widget to render a tile in the _ **admin\_dashboard.dart** _ page
+      - **text\_dialog\_widget.dart** - widget to display a overlay dialog with some text in it
+    - **admin\_borrow.dart** - page to borrow a book and add the corresponding entry to DB
+    - **admin\_dashboard.dart** - page to display the admin dashboard
+    - **admin\_home\_screen.dart** - scaffold page upon which the dashboard page is constructed
+    - **admin\_return.dart** - page to return a book and add the corresponding entry to DB
+    - **admin\_side\_bar.dart** - widget to render a side-bar in the application. Integrated into the _ **admin\_home\_screen.dart** _ page
+    - **data\_borrowers.dart** - page to display the record of borrowed books.
+    - **data\_page.dart** - page to display the books available to borrow from the library
+    - **data\_returners.dart** - page to display the record of returned books.
+  - /onboard - contains the pages to be rendered during the onboarding procedure
+    - **login\_screen.dart** - page for login process
+- **main.dart** - contains the root widget, starting from where, the entire application is configured &amp; run
+
+## [](https://github.com/balasubramanian1612s/library-management-system)Demo Video
+https://bit.ly/3nasF7o
