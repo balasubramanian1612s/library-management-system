@@ -77,7 +77,7 @@ Thus this system reduces manual work to a great extent allows smooth flow of lib
     - **admin\_return.dart** - page to return a book and add the corresponding entry to DB
     - **admin\_side\_bar.dart** - widget to render a side-bar in the application. Integrated into the _ **admin\_home\_screen.dart** _ page
     - **data\_borrowers.dart** - page to display the record of borrowed books.
-    - **data\_page.dart** - page to display the books available to borrow from the library
+    - **data\_page.dart** - page to display the books available to borrow from the library.
     - **data\_returners.dart** - page to display the record of returned books.
   - /onboard - contains the pages to be rendered during the onboarding procedure
     - **login\_screen.dart** - page for login process
