@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lms_student_user/model/side_bar_menu_model.dart';
 import 'package:lms_student_user/util/responsive.dart';
-import 'package:lms_student_user/view/admin/admin_return_history.dart';
+import 'package:lms_student_user/view/admin/student_return_history.dart';
 import 'package:provider/provider.dart';
 
-import 'admin_borrow_history.dart';
-import 'admin_side_bar.dart';
+import 'student_borrow_history.dart';
+import 'student_side_bar.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   String rollnumber;
